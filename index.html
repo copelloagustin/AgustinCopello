@@ -6,10 +6,10 @@
   <title>Agustín Copello — Desde Islandia Estudio, Córdoba</title>
   <meta name="description" content="Agustín Copello — Desde Islandia Estudio, Córdoba. Producción, Audio, Tutorías y Gear." />
 
-  <!-- Google Fonts: Syne (Títulos), Plus Jakarta Sans (Cuerpo), JetBrains Mono (Detalles técnicos) -->
+  <!-- Google Fonts: Cormorant Garamond (Títulos editoriales), Plus Jakarta Sans (Cuerpo), JetBrains Mono (Etiquetas técnicas) -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Syne:wght@600;700;800&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,600&family=JetBrains+Mono:wght@400;500;600&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
 
   <!-- Tailwind CSS CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
@@ -20,14 +20,15 @@
         extend: {
           fontFamily: {
             sans: ['"Plus Jakarta Sans"', 'system-ui', 'sans-serif'],
-            display: ['"Syne"', 'system-ui', 'sans-serif'],
+            serif: ['"Cormorant Garamond"', 'Georgia', 'serif'],
+            display: ['"Cormorant Garamond"', 'Georgia', 'serif'],
             mono: ['"JetBrains Mono"', 'monospace'],
           },
           colors: {
             matteBlack: '#0A0A0C',
             elevated: '#131316',
             elevatedHover: '#19191E',
-            subtleBorder: '#232329',
+            subtleBorder: '#222228',
             copperAmber: '#D99B4E',
             copperLight: '#E6B26B',
             whatsappGreen: '#25D366',
@@ -39,18 +40,18 @@
 </head>
 <body class="bg-matteBlack text-[#F4F4F6] font-sans antialiased selection:bg-copperAmber selection:text-matteBlack overflow-x-hidden">
 
-  <!-- ==================== 1. NAVBAR SUPERIOR (FIJA Y MINIMALISTA) ==================== -->
+  <!-- ==================== 1. NAVBAR SUPERIOR ==================== -->
   <header class="sticky top-0 z-50 bg-matteBlack/85 backdrop-blur-md border-b border-subtleBorder">
     <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="flex items-center justify-between h-16 sm:h-20">
-        <!-- Marca Izquierda: AGUSTÍN COPELLO -->
+        <!-- Marca Izquierda -->
         <a href="#inicio" class="group flex items-center gap-3 py-2 focus:outline-none">
           <span class="relative flex h-2.5 w-2.5" aria-hidden="true">
             <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-copperAmber opacity-60"></span>
-            <span class="relative inline-flex rounded-full h-2.5 w-2.5 bg-copperAmber shadow-[0_0_10px_rgba(217,155,78,0.8)]"></span>
+            <span class="relative inline-flex rounded-full h-2.5 w-2.5 bg-copperAmber shadow-[0_0_10px_rgba(217,155,78,0.85)]"></span>
           </span>
-          <span class="font-display font-bold text-sm sm:text-base tracking-wider uppercase text-[#F4F4F6] group-hover:text-copperLight transition-colors">
-            AGUSTÍN COPELLO
+          <span class="font-display font-bold text-xl sm:text-2xl tracking-wide text-[#F4F4F6] group-hover:text-copperLight transition-colors">
+            Agustín Copello
           </span>
         </a>
 
@@ -63,7 +64,7 @@
             Trabajos
           </a>
           <a href="#estudio" class="text-sm font-medium text-[#A1A1AA] hover:text-[#F4F4F6] transition-colors py-2">
-            Estudio
+            Islandia Estudio
           </a>
           <a href="#contacto" class="text-sm font-medium text-[#A1A1AA] hover:text-[#F4F4F6] transition-colors py-2">
             Contacto
@@ -114,7 +115,7 @@
         Trabajos
       </a>
       <a href="#estudio" class="mobile-nav-link block px-4 py-3 rounded-xl text-base font-medium text-[#F4F4F6] hover:bg-white/5">
-        Estudio
+        Islandia Estudio
       </a>
       <a href="#contacto" class="mobile-nav-link block px-4 py-3 rounded-xl text-base font-medium text-[#F4F4F6] hover:bg-white/5">
         Contacto
@@ -135,13 +136,27 @@
   <main id="inicio">
     <!-- ==================== 2. HERO SECTION ==================== -->
     <section class="relative overflow-hidden border-b border-subtleBorder">
-      <!-- Canvas animado sutil de ondas acústicas y grilla técnica -->
-      <div id="heroCanvasContainer" class="absolute inset-0 pointer-events-none">
-        <canvas id="acousticCanvas" class="w-full h-full block opacity-85"></canvas>
-      </div>
+      <!-- Capas de Fondo Atmosférico Difuso Dinámico (Crossfade de fotos del estudio) -->
+      <div class="absolute inset-0 pointer-events-none overflow-hidden" aria-hidden="true">
+        <!-- Capa fotográfica A -->
+        <div
+          id="heroBgLayerA"
+          class="absolute -inset-6 bg-cover bg-center blur-xl scale-105 opacity-0 transition-opacity duration-1000 ease-in-out"
+        ></div>
+        <!-- Capa fotográfica B -->
+        <div
+          id="heroBgLayerB"
+          class="absolute -inset-6 bg-cover bg-center blur-xl scale-105 opacity-0 transition-opacity duration-1000 ease-in-out"
+        ></div>
 
-      <!-- Iluminación ambiental radial cálida de estudio -->
-      <div class="absolute -top-36 left-1/2 -translate-x-1/2 w-[90vw] max-w-4xl h-80 bg-copperAmber/[0.08] blur-3xl rounded-full pointer-events-none"></div>
+        <!-- Tinte cálido ámbar/cobre atmosférico -->
+        <div class="absolute inset-0 bg-[#D99B4E]/[0.07] mix-blend-screen"></div>
+
+        <!-- Gradientes oscuros en #0A0A0C para contraste editorial nítido -->
+        <div class="absolute inset-0 bg-gradient-to-b from-matteBlack/85 via-matteBlack/75 to-matteBlack"></div>
+        <div class="absolute inset-0 bg-gradient-to-r from-matteBlack/95 via-matteBlack/75 to-matteBlack/85"></div>
+        <div class="absolute -top-36 left-1/2 -translate-x-1/2 w-[90vw] max-w-4xl h-80 bg-copperAmber/[0.09] blur-3xl rounded-full"></div>
+      </div>
 
       <div class="relative max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 pt-16 pb-20 sm:pt-24 sm:pb-28 lg:pt-32 lg:pb-32">
         <div class="max-w-3xl">
@@ -157,16 +172,16 @@
           </div>
 
           <!-- Título Principal (H1) -->
-          <h1 class="font-display font-bold text-4xl sm:text-6xl lg:text-7xl tracking-tight text-[#F4F4F6] leading-[1.05]">
+          <h1 class="font-display font-bold text-5xl sm:text-7xl lg:text-8xl tracking-tight text-[#F4F4F6] leading-[0.98]">
             Agustín Copello
           </h1>
 
-          <!-- Subtítulo inmediato -->
+          <!-- Subtítulo inmediato (sin párrafo descriptivo adicional) -->
           <p class="mt-4 text-xl sm:text-2xl lg:text-3xl font-medium text-copperLight tracking-tight">
             Desde Islandia Estudio, Córdoba.
           </p>
 
-          <!-- Botones de Acción -->
+          <!-- Botones CTA -->
           <div class="mt-10 flex flex-col sm:flex-row flex-wrap items-stretch sm:items-center gap-3.5 sm:gap-4">
             <a
               href="#servicios"
@@ -182,45 +197,65 @@
               href="https://www.islandiaestudio.com/"
               target="_blank"
               rel="noopener noreferrer"
-              class="inline-flex items-center justify-center gap-2 px-6 py-4 rounded-xl bg-elevated hover:bg-elevatedHover text-[#F4F4F6] hover:text-copperLight border border-subtleBorder hover:border-copperAmber/55 font-medium text-sm sm:text-base transition-all duration-200"
+              class="inline-flex items-center justify-center gap-2 px-6 py-4 rounded-xl bg-elevated/90 hover:bg-elevatedHover text-[#F4F4F6] hover:text-copperLight border border-subtleBorder hover:border-copperAmber/55 font-medium text-sm sm:text-base transition-all duration-200"
             >
               <span>Visitar Islandia Estudio ↗</span>
             </a>
           </div>
         </div>
 
-        <!-- Grilla de 4 bloques resumen de áreas -->
+        <!-- Grilla de 4 Pilares en la base del Hero -->
         <div class="mt-16 sm:mt-24 pt-8 border-t border-subtleBorder grid grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-5">
-          <!-- Bloque 1: Etiqueta superior "Creación" + título "Producción" -->
-          <a href="#servicios" data-filter-jump="Producción" class="group p-5 rounded-2xl bg-elevated/85 hover:bg-elevated border border-subtleBorder hover:border-copperAmber/50 transition-all flex flex-col justify-end min-h-[96px]">
+          <!-- Pilar 1: Etiqueta superior "Creación" + título "Producción" -->
+          <a
+            href="#servicios"
+            data-pillar="produccion"
+            data-filter-jump="produccion"
+            class="hero-pillar-card group p-5 rounded-2xl bg-elevated/85 hover:bg-elevated border border-subtleBorder hover:border-copperAmber/55 transition-all flex flex-col justify-end min-h-[104px]"
+          >
             <span class="font-mono text-[11px] uppercase tracking-widest text-copperLight block mb-1.5">
               Creación
             </span>
-            <span class="font-display font-bold text-lg sm:text-xl text-[#F4F4F6] group-hover:text-copperLight transition-colors">
+            <span class="font-display font-bold text-2xl sm:text-3xl text-[#F4F4F6] group-hover:text-copperLight transition-colors">
               Producción
             </span>
           </a>
 
-          <!-- Bloque 2: SIN etiqueta superior + título "Audio" -->
-          <a href="#servicios" data-filter-jump="Audio" class="group p-5 rounded-2xl bg-elevated/85 hover:bg-elevated border border-subtleBorder hover:border-copperAmber/50 transition-all flex flex-col justify-end min-h-[96px]">
-            <span class="font-display font-bold text-lg sm:text-xl text-[#F4F4F6] group-hover:text-copperLight transition-colors">
+          <!-- Pilar 2: SIN etiqueta superior + título "Audio" -->
+          <a
+            href="#servicios"
+            data-pillar="audio"
+            data-filter-jump="audio"
+            class="hero-pillar-card group p-5 rounded-2xl bg-elevated/85 hover:bg-elevated border border-subtleBorder hover:border-copperAmber/55 transition-all flex flex-col justify-end min-h-[104px]"
+          >
+            <span class="font-display font-bold text-2xl sm:text-3xl text-[#F4F4F6] group-hover:text-copperLight transition-colors">
               Audio
             </span>
           </a>
 
-          <!-- Bloque 3: Etiqueta superior "Formación" + título "Tutorías" -->
-          <a href="#servicios" data-filter-jump="Tutorías" class="group p-5 rounded-2xl bg-elevated/85 hover:bg-elevated border border-subtleBorder hover:border-copperAmber/50 transition-all flex flex-col justify-end min-h-[96px]">
+          <!-- Pilar 3: Etiqueta superior "Formación" + título "Tutorías" -->
+          <a
+            href="#servicios"
+            data-pillar="tutorias"
+            data-filter-jump="tutorias"
+            class="hero-pillar-card group p-5 rounded-2xl bg-elevated/85 hover:bg-elevated border border-subtleBorder hover:border-copperAmber/55 transition-all flex flex-col justify-end min-h-[104px]"
+          >
             <span class="font-mono text-[11px] uppercase tracking-widest text-copperLight block mb-1.5">
               Formación
             </span>
-            <span class="font-display font-bold text-lg sm:text-xl text-[#F4F4F6] group-hover:text-copperLight transition-colors">
+            <span class="font-display font-bold text-2xl sm:text-3xl text-[#F4F4F6] group-hover:text-copperLight transition-colors">
               Tutorías
             </span>
           </a>
 
-          <!-- Bloque 4: SIN etiqueta superior + título "Gear" -->
-          <a href="#servicios" data-filter-jump="Gear" class="group p-5 rounded-2xl bg-elevated/85 hover:bg-elevated border border-subtleBorder hover:border-copperAmber/50 transition-all flex flex-col justify-end min-h-[96px]">
-            <span class="font-display font-bold text-lg sm:text-xl text-[#F4F4F6] group-hover:text-copperLight transition-colors">
+          <!-- Pilar 4: SIN etiqueta superior + título "Gear" -->
+          <a
+            href="#servicios"
+            data-pillar="gear"
+            data-filter-jump="gear"
+            class="hero-pillar-card group p-5 rounded-2xl bg-elevated/85 hover:bg-elevated border border-subtleBorder hover:border-copperAmber/55 transition-all flex flex-col justify-end min-h-[104px]"
+          >
+            <span class="font-display font-bold text-2xl sm:text-3xl text-[#F4F4F6] group-hover:text-copperLight transition-colors">
               Gear
             </span>
           </a>
@@ -232,9 +267,9 @@
     <section id="servicios" class="py-20 sm:py-28 border-b border-subtleBorder">
       <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         <!-- Encabezado y Filtros Interactivos -->
-        <div class="reveal-on-scroll flex flex-col lg:flex-row lg:items-end justify-between gap-6 mb-12">
+        <div class="reveal-on-scroll flex flex-col lg:flex-row lg:items-end justify-between gap-6 mb-10">
           <div>
-            <h2 class="font-display font-bold text-3xl sm:text-4xl lg:text-5xl tracking-tight text-[#F4F4F6]">
+            <h2 class="font-display font-bold text-4xl sm:text-5xl lg:text-6xl tracking-tight text-[#F4F4F6]">
               Servicios
             </h2>
             <p class="mt-3 text-sm sm:text-base text-[#A1A1AA] max-w-xl">
@@ -242,39 +277,39 @@
             </p>
           </div>
 
-          <!-- Filtros por categoría -->
+          <!-- Barra de filtros por categoría -->
           <div class="flex flex-wrap items-center gap-2" role="tablist" aria-label="Filtrar categorías de servicios">
             <button
               type="button"
-              data-filter="Todos"
+              data-filter="todos"
               class="filter-btn active px-4 py-2.5 rounded-xl font-mono text-xs uppercase tracking-wider bg-copperAmber text-matteBlack font-semibold border border-copperAmber transition-all cursor-pointer"
             >
               Todos
             </button>
             <button
               type="button"
-              data-filter="Producción"
+              data-filter="produccion"
               class="filter-btn px-4 py-2.5 rounded-xl font-mono text-xs uppercase tracking-wider bg-elevated text-[#A1A1AA] hover:text-[#F4F4F6] border border-subtleBorder hover:border-copperAmber/45 transition-all cursor-pointer"
             >
               Producción
             </button>
             <button
               type="button"
-              data-filter="Audio"
+              data-filter="audio"
               class="filter-btn px-4 py-2.5 rounded-xl font-mono text-xs uppercase tracking-wider bg-elevated text-[#A1A1AA] hover:text-[#F4F4F6] border border-subtleBorder hover:border-copperAmber/45 transition-all cursor-pointer"
             >
               Audio
             </button>
             <button
               type="button"
-              data-filter="Tutorías"
+              data-filter="tutorias"
               class="filter-btn px-4 py-2.5 rounded-xl font-mono text-xs uppercase tracking-wider bg-elevated text-[#A1A1AA] hover:text-[#F4F4F6] border border-subtleBorder hover:border-copperAmber/45 transition-all cursor-pointer"
             >
               Tutorías
             </button>
             <button
               type="button"
-              data-filter="Gear"
+              data-filter="gear"
               class="filter-btn px-4 py-2.5 rounded-xl font-mono text-xs uppercase tracking-wider bg-elevated text-[#A1A1AA] hover:text-[#F4F4F6] border border-subtleBorder hover:border-copperAmber/45 transition-all cursor-pointer"
             >
               Gear
@@ -282,11 +317,39 @@
           </div>
         </div>
 
+        <!-- Cabecera Atmosférica Difusa al seleccionar una categoría específica (se activa si hay fotos disponibles) -->
+        <div
+          id="categoryAtmosphericBanner"
+          class="hidden relative overflow-hidden rounded-2xl border border-copperAmber/35 mb-8 p-6 sm:p-8 transition-all duration-500"
+        >
+          <div
+            id="categoryBannerBg"
+            class="absolute -inset-4 bg-cover bg-center blur-md scale-105 opacity-35 transition-all duration-700"
+            aria-hidden="true"
+          ></div>
+          <div class="absolute inset-0 bg-[#D99B4E]/10 mix-blend-screen pointer-events-none" aria-hidden="true"></div>
+          <div class="absolute inset-0 bg-gradient-to-r from-matteBlack/95 via-matteBlack/80 to-matteBlack/70 pointer-events-none" aria-hidden="true"></div>
+
+          <div class="relative z-10 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+            <div>
+              <span id="categoryBannerTag" class="font-mono text-[11px] uppercase tracking-widest text-copperLight block mb-1"></span>
+              <h3 id="categoryBannerTitle" class="font-display font-bold text-2xl sm:text-3xl text-[#F4F4F6]"></h3>
+            </div>
+            <button
+              type="button"
+              id="resetFilterBannerBtn"
+              class="self-start sm:self-center px-3.5 py-2 rounded-xl bg-matteBlack/80 hover:bg-matteBlack border border-subtleBorder hover:border-copperAmber/50 font-mono text-xs text-[#A1A1AA] hover:text-copperLight transition-colors cursor-pointer"
+            >
+              Ver todas las áreas
+            </button>
+          </div>
+        </div>
+
         <!-- Grilla 2x2 de Tarjetas Principales -->
         <div id="servicesGrid" class="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8">
 
-          <!-- TARJETA 1: PRODUCCIÓN (Con etiqueta superior "Creación") -->
-          <article data-category="Producción" class="service-card reveal-on-scroll group flex flex-col justify-between rounded-2xl bg-elevated border border-subtleBorder hover:border-copperAmber/50 p-6 sm:p-8 transition-all duration-300 shadow-xl shadow-black/30">
+          <!-- TARJETA 1: PRODUCCIÓN -->
+          <article data-category="produccion" class="service-card reveal-on-scroll group flex flex-col justify-between rounded-2xl bg-elevated border border-subtleBorder hover:border-copperAmber/50 p-6 sm:p-8 transition-all duration-300 shadow-xl shadow-black/30">
             <div>
               <div class="flex items-start justify-between gap-4 mb-6">
                 <div class="w-12 h-12 rounded-xl bg-matteBlack border border-subtleBorder group-hover:border-copperAmber/50 flex items-center justify-center text-copperAmber transition-colors">
@@ -305,7 +368,7 @@
               <span class="font-mono text-xs uppercase tracking-widest text-copperLight block mb-1.5">
                 Creación
               </span>
-              <h3 class="font-display font-bold text-2xl sm:text-3xl text-[#F4F4F6] tracking-tight">
+              <h3 class="font-display font-bold text-3xl sm:text-4xl text-[#F4F4F6] tracking-tight">
                 Producción
               </h3>
               <p class="mt-2.5 text-sm text-[#A1A1AA] leading-relaxed">
@@ -367,7 +430,7 @@
           </article>
 
           <!-- TARJETA 2: AUDIO (SIN etiqueta superior) -->
-          <article data-category="Audio" class="service-card reveal-on-scroll group flex flex-col justify-between rounded-2xl bg-elevated border border-subtleBorder hover:border-copperAmber/50 p-6 sm:p-8 transition-all duration-300 shadow-xl shadow-black/30">
+          <article data-category="audio" class="service-card reveal-on-scroll group flex flex-col justify-between rounded-2xl bg-elevated border border-subtleBorder hover:border-copperAmber/50 p-6 sm:p-8 transition-all duration-300 shadow-xl shadow-black/30">
             <div>
               <div class="flex items-start justify-between gap-4 mb-6">
                 <div class="w-12 h-12 rounded-xl bg-matteBlack border border-subtleBorder group-hover:border-copperAmber/50 flex items-center justify-center text-copperAmber transition-colors">
@@ -388,11 +451,11 @@
                 </span>
               </div>
 
-              <h3 class="font-display font-bold text-2xl sm:text-3xl text-[#F4F4F6] tracking-tight">
+              <h3 class="font-display font-bold text-3xl sm:text-4xl text-[#F4F4F6] tracking-tight">
                 Audio
               </h3>
               <p class="mt-2.5 text-sm text-[#A1A1AA] leading-relaxed">
-                Sistema hibrido Analógico-Digital para lograr profundidad, dinámica y traducción en cualquier sistema.
+                Sistema híbrido Analógico-Digital para lograr profundidad, dinámica y traducción en cualquier sistema.
               </p>
 
               <!-- Lista de servicios -->
@@ -433,8 +496,8 @@
             </div>
           </article>
 
-          <!-- TARJETA 3: TUTORÍAS (Con etiqueta superior "Formación") -->
-          <article data-category="Tutorías" class="service-card reveal-on-scroll group flex flex-col justify-between rounded-2xl bg-elevated border border-subtleBorder hover:border-copperAmber/50 p-6 sm:p-8 transition-all duration-300 shadow-xl shadow-black/30">
+          <!-- TARJETA 3: TUTORÍAS -->
+          <article data-category="tutorias" class="service-card reveal-on-scroll group flex flex-col justify-between rounded-2xl bg-elevated border border-subtleBorder hover:border-copperAmber/50 p-6 sm:p-8 transition-all duration-300 shadow-xl shadow-black/30">
             <div>
               <div class="flex items-start justify-between gap-4 mb-6">
                 <div class="w-12 h-12 rounded-xl bg-matteBlack border border-subtleBorder group-hover:border-copperAmber/50 flex items-center justify-center text-copperAmber transition-colors">
@@ -451,11 +514,11 @@
               <span class="font-mono text-xs uppercase tracking-widest text-copperLight block mb-1.5">
                 Formación
               </span>
-              <h3 class="font-display font-bold text-2xl sm:text-3xl text-[#F4F4F6] tracking-tight">
+              <h3 class="font-display font-bold text-3xl sm:text-4xl text-[#F4F4F6] tracking-tight">
                 Tutorías
               </h3>
               <p class="mt-2.5 text-sm text-[#A1A1AA] leading-relaxed">
-                Formación individual o grupal enfocada en criterio musical, flujo de trabajo en estudio y herramientas de producción.
+                Acompañamiento técnico y creativo adaptado a tus objetivos artísticos y de estudio.
               </p>
 
               <!-- Lista de servicios -->
@@ -497,7 +560,7 @@
           </article>
 
           <!-- TARJETA 4: GEAR (SIN etiqueta superior) -->
-          <article data-category="Gear" class="service-card reveal-on-scroll group flex flex-col justify-between rounded-2xl bg-elevated border border-subtleBorder hover:border-copperAmber/50 p-6 sm:p-8 transition-all duration-300 shadow-xl shadow-black/30">
+          <article data-category="gear" class="service-card reveal-on-scroll group flex flex-col justify-between rounded-2xl bg-elevated border border-subtleBorder hover:border-copperAmber/50 p-6 sm:p-8 transition-all duration-300 shadow-xl shadow-black/30">
             <div>
               <div class="flex items-start justify-between gap-4 mb-6">
                 <div class="w-12 h-12 rounded-xl bg-matteBlack border border-subtleBorder group-hover:border-copperAmber/50 flex items-center justify-center text-copperAmber transition-colors">
@@ -511,7 +574,7 @@
                 </span>
               </div>
 
-              <h3 class="font-display font-bold text-2xl sm:text-3xl text-[#F4F4F6] tracking-tight">
+              <h3 class="font-display font-bold text-3xl sm:text-4xl text-[#F4F4F6] tracking-tight">
                 Gear
               </h3>
               <p class="mt-2.5 text-sm text-[#A1A1AA] leading-relaxed">
@@ -600,11 +663,11 @@
           <span class="font-mono text-xs tracking-widest uppercase text-copperLight block mb-2.5">
             PORTFOLIO SONORO
           </span>
-          <h2 class="font-display font-bold text-3xl sm:text-4xl lg:text-5xl tracking-tight text-[#F4F4F6]">
+          <h2 class="font-display font-bold text-4xl sm:text-5xl lg:text-6xl tracking-tight text-[#F4F4F6]">
             Escuchá mis trabajos más recientes
           </h2>
           <p class="mt-3 text-sm sm:text-base text-[#A1A1AA] leading-relaxed">
-            Selección de producciones, grabaciones, mezclas y masterings realizados en estudio.
+            Selección de producciones, grabaciones y mezclas realizadas en estudio.
           </p>
         </div>
 
@@ -619,30 +682,18 @@
               </span>
             </div>
 
-            <!-- Enlaces directos con íconos a Spotify y YouTube Music -->
-            <div class="flex flex-wrap items-center gap-2.5">
+            <!-- Únicamente enlace limpio a Spotify -->
+            <div class="flex items-center">
               <a
                 href="https://open.spotify.com/playlist/34c6JO836O6unLjweD5uCV?si=2ed9c331523945b0"
                 target="_blank"
                 rel="noopener noreferrer"
-                class="inline-flex items-center gap-2 px-3.5 py-2 rounded-xl bg-elevated hover:bg-elevatedHover text-[#F4F4F6] hover:text-copperLight border border-subtleBorder hover:border-copperAmber/50 text-xs font-mono transition-all duration-200"
+                class="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-elevated hover:bg-elevatedHover text-[#F4F4F6] hover:text-copperLight border border-subtleBorder hover:border-copperAmber/50 text-xs font-mono transition-all duration-200"
               >
                 <svg class="w-4 h-4 text-[#1DB954]" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
                   <path d="M12 0C5.4 0 0 5.4 0 12s5.4 12 12 12 12-5.4 12-12S18.66 0 12 0zm5.521 17.34c-.24.359-.66.48-1.021.24-2.82-1.74-6.36-2.101-10.561-1.141-.418.122-.779-.179-.899-.539-.12-.421.18-.78.54-.9 4.56-1.021 8.52-.6 11.64 1.32.42.18.479.659.301 1.02zm1.44-3.3c-.301.42-.841.6-1.262.3-3.239-1.98-8.159-2.58-11.939-1.38-.479.12-1.02-.12-1.14-.6-.12-.48.12-1.021.6-1.141C9.6 9.9 15 10.561 18.72 12.84c.361.181.54.78.241 1.2zm.12-3.36C15.24 8.4 8.82 8.16 5.16 9.301c-.6.179-1.2-.181-1.38-.721-.18-.601.18-1.2.72-1.381 4.26-1.26 11.28-1.02 15.721 1.621.539.3.719 1.02.419 1.56-.299.421-1.02.599-1.559.3z"/>
                 </svg>
-                <span>Spotify ↗</span>
-              </a>
-
-              <a
-                href="https://music.youtube.com/search?q=Agustin+Copello"
-                target="_blank"
-                rel="noopener noreferrer"
-                class="inline-flex items-center gap-2 px-3.5 py-2 rounded-xl bg-elevated hover:bg-elevatedHover text-[#F4F4F6] hover:text-copperLight border border-subtleBorder hover:border-copperAmber/50 text-xs font-mono transition-all duration-200"
-              >
-                <svg class="w-4 h-4 text-[#FF0000]" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-                  <path d="M12 0C5.376 0 0 5.376 0 12s5.376 12 12 12 12-5.376 12-12S18.624 0 12 0zm0 19.104c-3.924 0-7.104-3.18-7.104-7.104S8.076 4.896 12 4.896s7.104 3.18 7.104 7.104-3.18 7.104-7.104 7.104zm0-13.332c-3.432 0-6.228 2.796-6.228 6.228S8.568 18.228 12 18.228s6.228-2.796 6.228-6.228S15.432 5.772 12 5.772zM9.684 15.54V8.46L15.816 12l-6.132 3.54z"/>
-                </svg>
-                <span>YouTube Music ↗</span>
+                <span>Abrir playlist en Spotify ↗</span>
               </a>
             </div>
           </div>
@@ -685,7 +736,7 @@
                 Córdoba, Argentina
               </span>
 
-              <h2 class="font-display font-bold text-3xl sm:text-4xl lg:text-5xl text-[#F4F4F6] tracking-tight">
+              <h2 class="font-display font-bold text-4xl sm:text-5xl lg:text-6xl text-[#F4F4F6] tracking-tight">
                 Islandia Estudio
               </h2>
 
@@ -712,7 +763,7 @@
                 rel="noopener noreferrer"
                 class="inline-flex items-center justify-center gap-2 px-6 py-4 rounded-xl bg-copperAmber hover:bg-copperLight text-matteBlack font-semibold text-sm sm:text-base transition-all duration-200 shadow-lg shadow-copperAmber/20"
               >
-                <span>Ir a islandiaestudio.com ↗</span>
+                <span>Conocer Islandia Estudio ↗</span>
               </a>
             </div>
           </div>
@@ -731,7 +782,7 @@
               <span class="font-mono text-xs tracking-widest uppercase text-copperLight block mb-2">
                 // CONTACTO
               </span>
-              <h2 class="font-display font-bold text-3xl sm:text-4xl text-[#F4F4F6] tracking-tight">
+              <h2 class="font-display font-bold text-4xl sm:text-5xl text-[#F4F4F6] tracking-tight">
                 Contame sobre tu proyecto
               </h2>
               <p class="mt-3 text-sm sm:text-base text-[#A1A1AA] leading-relaxed">
@@ -741,7 +792,7 @@
 
             <!-- Botón Destacado de Contacto Directo por WhatsApp -->
             <a
-              href="https://wa.me/5493513607410?text=Hola%20Agust%C3%ADn%2C%20vengo%20de%20tu%20web%20y%20queria%20hacerte%20una%20consulta."
+              href="https://wa.me/5493513607410?text=Hola%20Agust%C3%ADn%2C%20vengo%20de%20tu%20web%20y%20quer%C3%ADa%20hacerte%20una%20consulta."
               target="_blank"
               rel="noopener noreferrer"
               class="group flex items-center justify-between gap-4 rounded-2xl bg-elevated hover:bg-elevatedHover border border-whatsappGreen/40 hover:border-whatsappGreen p-5 transition-all duration-300 shadow-lg shadow-whatsappGreen/[0.06] hover:shadow-whatsappGreen/[0.14]"
@@ -753,11 +804,8 @@
                   </svg>
                 </div>
                 <div>
-                  <span class="font-display font-bold text-base sm:text-lg text-[#F4F4F6] group-hover:text-whatsappGreen transition-colors block">
-                    Contactar por WhatsApp
-                  </span>
-                  <span class="font-mono text-xs sm:text-sm text-[#A1A1AA]">
-                    +54 9 351 360 7410
+                  <span class="font-semibold text-sm sm:text-base text-[#F4F4F6] group-hover:text-whatsappGreen transition-colors block">
+                    Contactar por WhatsApp (+54 9 351 360 7410)
                   </span>
                 </div>
               </div>
@@ -839,10 +887,10 @@
                   </div>
                 </div>
 
-                <!-- Mensaje / Detalles del proyecto -->
+                <!-- Mensaje / Detalles -->
                 <div>
                   <label for="inputMensaje" class="block font-mono text-xs uppercase tracking-wider text-[#A1A1AA] mb-2">
-                    Mensaje / Detalles del proyecto *
+                    Mensaje / Detalles *
                   </label>
                   <textarea
                     id="inputMensaje"
@@ -854,7 +902,7 @@
                   ></textarea>
                 </div>
 
-                <!-- Banner de validación en línea (sin alert()) -->
+                <!-- Banner de validación en línea -->
                 <div id="formErrorBanner" class="hidden px-4 py-3 rounded-xl bg-red-500/10 border border-red-500/30 text-red-300 text-xs font-mono">
                   Por favor completá tu nombre o proyecto y los detalles de la consulta para abrir WhatsApp.
                 </div>
@@ -887,7 +935,7 @@
                     <span class="font-mono text-xs uppercase tracking-wider text-whatsappGreen block">
                       Consulta preparada para WhatsApp
                     </span>
-                    <h3 class="font-display font-bold text-xl sm:text-2xl text-[#F4F4F6]">
+                    <h3 class="font-display font-bold text-2xl sm:text-3xl text-[#F4F4F6]">
                       ¡Gracias por escribir, <span id="confirmNombre"></span>!
                     </h3>
                   </div>
@@ -907,7 +955,7 @@
                 <div class="flex flex-wrap items-center gap-3 pt-2">
                   <a
                     id="directWhatsappRetryBtn"
-                    href="https://wa.me/5493513607410?text=Hola%20Agust%C3%ADn%2C%20vengo%20de%20tu%20web%20y%20queria%20hacerte%20una%20consulta."
+                    href="https://wa.me/5493513607410?text=Hola%20Agust%C3%ADn%2C%20vengo%20de%20tu%20web%20y%20quer%C3%ADa%20hacerte%20una%20consulta."
                     target="_blank"
                     rel="noopener noreferrer"
                     class="inline-flex items-center gap-2 px-4 py-3 rounded-xl bg-whatsappGreen hover:bg-[#2be06e] text-matteBlack font-mono text-xs font-semibold transition-colors"
@@ -943,23 +991,14 @@
   <footer class="border-t border-subtleBorder bg-matteBlack py-10 sm:py-12 pb-24 sm:pb-12">
     <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-6">
       <div class="text-center sm:text-left">
-        <p class="font-display font-bold text-base text-[#F4F4F6]">
-          Agustín Copello · Desde Islandia Estudio, Córdoba.
+        <p class="font-display font-bold text-lg text-[#F4F4F6]">
+          Agustín Copello — Córdoba, Argentina
         </p>
       </div>
 
       <div class="flex flex-wrap items-center justify-center gap-5 sm:gap-6">
-        <a href="#servicios" class="text-xs font-mono text-[#A1A1AA] hover:text-[#F4F4F6] transition-colors">
-          Servicios
-        </a>
-        <a href="#trabajos" class="text-xs font-mono text-[#A1A1AA] hover:text-[#F4F4F6] transition-colors">
-          Trabajos
-        </a>
-        <a href="#estudio" class="text-xs font-mono text-[#A1A1AA] hover:text-[#F4F4F6] transition-colors">
-          Estudio
-        </a>
         <a
-          href="https://wa.me/5493513607410?text=Hola%20Agust%C3%ADn%2C%20vengo%20de%20tu%20web%20y%20queria%20hacerte%20una%20consulta."
+          href="https://wa.me/5493513607410?text=Hola%20Agust%C3%ADn%2C%20vengo%20de%20tu%20web%20y%20quer%C3%ADa%20hacerte%20una%20consulta."
           target="_blank"
           rel="noopener noreferrer"
           class="inline-flex items-center gap-1.5 text-xs font-mono text-whatsappGreen hover:text-[#2be06e] transition-colors"
@@ -980,7 +1019,7 @@
 
   <!-- ==================== 8. BOTÓN FLOTANTE DE WHATSAPP ==================== -->
   <a
-    href="https://wa.me/5493513607410?text=Hola%20Agust%C3%ADn%2C%20vengo%20de%20tu%20web%20y%20queria%20hacerte%20una%20consulta."
+    href="https://wa.me/5493513607410?text=Hola%20Agust%C3%ADn%2C%20vengo%20de%20tu%20web%20y%20quer%C3%ADa%20hacerte%20una%20consulta."
     target="_blank"
     rel="noopener noreferrer"
     aria-label="Contactar a Agustín Copello por WhatsApp"
@@ -996,7 +1035,126 @@
     (function () {
       'use strict';
 
-      // 1. Catálogo exacto de Áreas y Servicios
+      // 1. Sistema de Fotos listo para GitHub Pages (intenta "fotos/fotoX.jpg" y luego "fotoX.jpg" en la raíz)
+      const STUDIO_PHOTOS = [
+        { category: 'produccion', file: 'foto1.jpg' },
+        { category: 'produccion', file: 'foto2.jpg' },
+        { category: 'produccion', file: 'foto3.jpg' },
+        { category: 'audio',      file: 'foto4.jpg' },
+        { category: 'audio',      file: 'foto5.jpg' },
+        { category: 'audio',      file: 'foto6.jpg' },
+        { category: 'tutorias',   file: 'foto7.jpg' },
+        { category: 'gear',       file: 'foto8.jpg' },
+        { category: 'gear',       file: 'foto9.jpg' },
+        { category: 'gear',       file: 'foto10.jpg' }
+      ];
+
+      const CATEGORY_META = {
+        produccion: { tag: 'Creación', title: 'Producción' },
+        audio:      { tag: 'Ingeniería & Mezcla', title: 'Audio' },
+        tutorias:   { tag: 'Formación', title: 'Tutorías' },
+        gear:       { tag: 'Equipamiento & Acústica', title: 'Gear' }
+      };
+
+      const loadedPhotos = [];
+      const photosByCategory = {
+        produccion: [],
+        audio: [],
+        tutorias: [],
+        gear: []
+      };
+
+      // Cargador silencioso con fallback automático entre carpeta "fotos/" y raíz
+      function probeImageUrl(url) {
+        return new Promise((resolve) => {
+          const img = new Image();
+          img.onload = () => resolve(url);
+          img.onerror = () => resolve(null);
+          img.src = url;
+        });
+      }
+
+      async function initStudioPhotos() {
+        const checks = STUDIO_PHOTOS.map(async (item) => {
+          const fromFolder = await probeImageUrl(`fotos/${item.file}`);
+          if (fromFolder) {
+            return { category: item.category, url: fromFolder };
+          }
+          const fromRoot = await probeImageUrl(item.file);
+          if (fromRoot) {
+            return { category: item.category, url: fromRoot };
+          }
+          return null;
+        });
+
+        const results = await Promise.all(checks);
+        results.forEach((entry) => {
+          if (entry) {
+            loadedPhotos.push(entry);
+            if (photosByCategory[entry.category]) {
+              photosByCategory[entry.category].push(entry.url);
+            }
+          }
+        });
+
+        if (loadedPhotos.length > 0) {
+          startHeroBackgroundRotation();
+        }
+      }
+
+      // Crossfade suave del fondo atmosférico difuso en el Hero
+      const heroLayerA = document.getElementById('heroBgLayerA');
+      const heroLayerB = document.getElementById('heroBgLayerB');
+      let activeHeroLayer = 'A';
+      let currentHeroIndex = 0;
+      let heroRotationTimer = null;
+
+      function crossfadeHeroToUrl(url) {
+        if (!heroLayerA || !heroLayerB || !url) return;
+
+        if (activeHeroLayer === 'A') {
+          heroLayerB.style.backgroundImage = `url('${url}')`;
+          heroLayerB.classList.remove('opacity-0');
+          heroLayerB.classList.add('opacity-30');
+          heroLayerA.classList.remove('opacity-30');
+          heroLayerA.classList.add('opacity-0');
+          activeHeroLayer = 'B';
+        } else {
+          heroLayerA.style.backgroundImage = `url('${url}')`;
+          heroLayerA.classList.remove('opacity-0');
+          heroLayerA.classList.add('opacity-30');
+          heroLayerB.classList.remove('opacity-30');
+          heroLayerB.classList.add('opacity-0');
+          activeHeroLayer = 'A';
+        }
+      }
+
+      function startHeroBackgroundRotation() {
+        if (loadedPhotos.length === 0) return;
+
+        crossfadeHeroToUrl(loadedPhotos[0].url);
+
+        if (loadedPhotos.length > 1) {
+          heroRotationTimer = setInterval(() => {
+            currentHeroIndex = (currentHeroIndex + 1) % loadedPhotos.length;
+            crossfadeHeroToUrl(loadedPhotos[currentHeroIndex].url);
+          }, 6000);
+        }
+      }
+
+      // Cambio dinámico al pasar el mouse por los pilares del Hero
+      document.querySelectorAll('.hero-pillar-card').forEach((card) => {
+        card.addEventListener('mouseenter', () => {
+          const cat = card.getAttribute('data-pillar');
+          const catPhotos = photosByCategory[cat] || [];
+          if (catPhotos.length > 0) {
+            const randomUrl = catPhotos[Math.floor(Math.random() * catPhotos.length)];
+            crossfadeHeroToUrl(randomUrl);
+          }
+        });
+      });
+
+      // 2. Catálogo exacto de Áreas y Servicios
       const SERVICE_CATALOG = {
         'Producción': [
           'Composición y arreglos',
@@ -1023,7 +1181,7 @@
         ]
       };
 
-      // 2. Menú Móvil
+      // 3. Menú Móvil
       const mobileMenuBtn = document.getElementById('mobileMenuBtn');
       const mobileMenu = document.getElementById('mobileMenu');
       const menuIconOpen = document.getElementById('menuIconOpen');
@@ -1048,9 +1206,35 @@
         });
       }
 
-      // 3. Filtros Interactivos de Servicios
+      // 4. Filtros Interactivos de Servicios + Cabecera Atmosférica por Categoría
       const filterButtons = document.querySelectorAll('.filter-btn');
       const serviceCards = document.querySelectorAll('.service-card');
+      const categoryBanner = document.getElementById('categoryAtmosphericBanner');
+      const categoryBannerBg = document.getElementById('categoryBannerBg');
+      const categoryBannerTag = document.getElementById('categoryBannerTag');
+      const categoryBannerTitle = document.getElementById('categoryBannerTitle');
+      const resetFilterBannerBtn = document.getElementById('resetFilterBannerBtn');
+
+      function updateCategoryBanner(selectedCategory) {
+        if (!categoryBanner) return;
+
+        if (selectedCategory === 'todos') {
+          categoryBanner.classList.add('hidden');
+          return;
+        }
+
+        const catPhotos = photosByCategory[selectedCategory] || [];
+        const meta = CATEGORY_META[selectedCategory];
+
+        if (catPhotos.length > 0 && meta) {
+          categoryBannerBg.style.backgroundImage = `url('${catPhotos[0]}')`;
+          categoryBannerTag.textContent = meta.tag;
+          categoryBannerTitle.textContent = meta.title;
+          categoryBanner.classList.remove('hidden');
+        } else {
+          categoryBanner.classList.add('hidden');
+        }
+      }
 
       function applyCategoryFilter(selectedCategory) {
         filterButtons.forEach((btn) => {
@@ -1066,12 +1250,14 @@
 
         serviceCards.forEach((card) => {
           const cardCat = card.getAttribute('data-category');
-          if (selectedCategory === 'Todos' || cardCat === selectedCategory) {
+          if (selectedCategory === 'todos' || cardCat === selectedCategory) {
             card.classList.remove('hidden');
           } else {
             card.classList.add('hidden');
           }
         });
+
+        updateCategoryBanner(selectedCategory);
       }
 
       filterButtons.forEach((btn) => {
@@ -1079,6 +1265,12 @@
           applyCategoryFilter(btn.getAttribute('data-filter'));
         });
       });
+
+      if (resetFilterBannerBtn) {
+        resetFilterBannerBtn.addEventListener('click', () => {
+          applyCategoryFilter('todos');
+        });
+      }
 
       document.querySelectorAll('[data-filter-jump]').forEach((jumpLink) => {
         jumpLink.addEventListener('click', () => {
@@ -1089,7 +1281,7 @@
         });
       });
 
-      // 4. Preselección automática de Área y Servicio en el formulario
+      // 5. Preselección automática de Área y Servicio en el formulario
       const selectArea = document.getElementById('selectArea');
       const selectServicio = document.getElementById('selectServicio');
       const formCardContainer = document.getElementById('formCardContainer');
@@ -1134,11 +1326,10 @@
             contactSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
           }
 
-          // Resaltado breve de los campos preseleccionados y la tarjeta
           if (formCardContainer) {
-            formCardContainer.classList.add('border-copperAmber/70');
+            formCardContainer.classList.add('border-copperAmber/75');
             setTimeout(() => {
-              formCardContainer.classList.remove('border-copperAmber/70');
+              formCardContainer.classList.remove('border-copperAmber/75');
             }, 1400);
           }
           selectArea.classList.add('border-copperAmber');
@@ -1150,7 +1341,7 @@
         });
       });
 
-      // 5. Envío del Formulario directo a WhatsApp, Resumen y Copiado Seguro
+      // 6. Envío del Formulario directo a WhatsApp, Resumen y Copiado Seguro
       const WHATSAPP_NUMBER = '5493513607410';
       const formErrorBanner = document.getElementById('formErrorBanner');
       const directWhatsappRetryBtn = document.getElementById('directWhatsappRetryBtn');
@@ -1239,7 +1430,7 @@
         });
       }
 
-      // 6. Animaciones suaves al hacer scroll (IntersectionObserver)
+      // 7. Animaciones suaves al hacer scroll
       function initScrollReveal() {
         const revealElements = document.querySelectorAll('.reveal-on-scroll');
         if (!('IntersectionObserver' in window)) return;
@@ -1261,111 +1452,9 @@
         revealElements.forEach((el) => observer.observe(el));
       }
 
-      // 7. Canvas responsivo del Hero: Grilla de consola + Ondas acústicas + Espectro sutil
-      function initAcousticCanvas() {
-        const container = document.getElementById('heroCanvasContainer');
-        const canvas = document.getElementById('acousticCanvas');
-        if (!container || !canvas) return;
-
-        const ctx = canvas.getContext('2d');
-        let width = 0;
-        let height = 0;
-        let phase = 0;
-        let pointerX = 0.5;
-
-        function resizeCanvas() {
-          const rect = container.getBoundingClientRect();
-          const dpr = Math.min(window.devicePixelRatio || 1, 2);
-          width = rect.width;
-          height = rect.height;
-          canvas.width = width * dpr;
-          canvas.height = height * dpr;
-          ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-        }
-
-        window.addEventListener('resize', resizeCanvas);
-        window.addEventListener('mousemove', (e) => {
-          if (width > 0) {
-            pointerX = e.clientX / width;
-          }
-        });
-
-        resizeCanvas();
-
-        function renderStudioVisuals() {
-          ctx.clearRect(0, 0, width, height);
-
-          // Grilla sutil de consola de estudio
-          const gridSpacing = width < 640 ? 48 : 72;
-          ctx.strokeStyle = 'rgba(255, 255, 255, 0.03)';
-          ctx.lineWidth = 1;
-
-          for (let x = 0; x < width; x += gridSpacing) {
-            ctx.beginPath();
-            ctx.moveTo(x, 0);
-            ctx.lineTo(x, height);
-            ctx.stroke();
-          }
-
-          for (let y = 0; y < height; y += gridSpacing) {
-            ctx.beginPath();
-            ctx.moveTo(0, y);
-            ctx.lineTo(width, y);
-            ctx.stroke();
-          }
-
-          // Barras minimalistas de analizador de espectro en tonos ámbar/dorado tenue
-          const barCount = width < 640 ? 28 : 54;
-          const barStep = width / barCount;
-          const spectrumBaseY = height * 0.78;
-
-          for (let i = 0; i < barCount; i++) {
-            const norm = i / barCount;
-            const envelope = Math.sin(norm * Math.PI);
-            const barHeight = (10 + Math.abs(Math.sin(i * 0.42 + phase * 1.4)) * 28) * envelope;
-            const x = i * barStep + barStep * 0.35;
-
-            ctx.fillStyle = 'rgba(217, 155, 78, 0.09)';
-            ctx.fillRect(x, spectrumBaseY - barHeight, Math.max(2, barStep * 0.25), barHeight);
-          }
-
-          // Ondas acústicas armónicas
-          const waves = [
-            { amp: 24, freq: 0.0055, speed: 0.014, color: 'rgba(217, 155, 78, 0.24)', yOffset: 0.56 },
-            { amp: 15, freq: 0.0095, speed: -0.018, color: 'rgba(230, 178, 107, 0.13)', yOffset: 0.60 },
-            { amp: 9, freq: 0.014, speed: 0.024, color: 'rgba(244, 244, 246, 0.06)', yOffset: 0.53 }
-          ];
-
-          waves.forEach((w) => {
-            ctx.beginPath();
-            ctx.strokeStyle = w.color;
-            ctx.lineWidth = 1.4;
-
-            const baseY = height * w.yOffset;
-            const dynamicAmp = w.amp * (0.85 + pointerX * 0.35);
-
-            for (let x = 0; x <= width; x += 6) {
-              const envelope = Math.sin((x / width) * Math.PI);
-              const y = baseY + Math.sin(x * w.freq + phase * (w.speed * 60)) * dynamicAmp * envelope;
-              if (x === 0) {
-                ctx.moveTo(x, y);
-              } else {
-                ctx.lineTo(x, y);
-              }
-            }
-            ctx.stroke();
-          });
-
-          phase += 0.016;
-          requestAnimationFrame(renderStudioVisuals);
-        }
-
-        renderStudioVisuals();
-      }
-
       window.addEventListener('load', () => {
         initScrollReveal();
-        initAcousticCanvas();
+        initStudioPhotos();
       });
     })();
   </script>
