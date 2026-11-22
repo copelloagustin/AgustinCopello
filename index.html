@@ -37,6 +37,44 @@
       },
     };
   </script>
+
+  <style>
+    /* Tratamiento unificado Composite / Colorización Ámbar-Obsidiana */
+    .composite-frame {
+      background-color: #2b1b0e;
+      background-image: radial-gradient(circle at 50% 35%, rgba(217, 155, 78, 0.22), rgba(19, 19, 22, 0.92) 85%);
+    }
+    .composite-photo {
+      filter: grayscale(100%) contrast(1.18) brightness(0.82);
+      mix-blend-mode: luminosity;
+      transition: transform 0.6s ease, filter 0.5s ease, opacity 0.45s ease;
+    }
+    .group:hover .composite-photo,
+    .composite-frame:hover .composite-photo {
+      filter: grayscale(92%) contrast(1.15) brightness(0.88);
+    }
+    .composite-amber-tint {
+      background-color: rgba(217, 155, 78, 0.14);
+      mix-blend-mode: color;
+    }
+    .composite-surface-fade {
+      background: linear-gradient(
+        180deg,
+        rgba(10, 10, 12, 0.22) 0%,
+        rgba(19, 19, 22, 0.1) 45%,
+        rgba(19, 19, 22, 0.86) 86%,
+        #131316 100%
+      );
+    }
+    .composite-modal-fade {
+      background: linear-gradient(
+        180deg,
+        rgba(10, 10, 12, 0.22) 0%,
+        rgba(10, 10, 12, 0.04) 50%,
+        rgba(10, 10, 12, 0.78) 100%
+      );
+    }
+  </style>
 </head>
 <body class="bg-matteBlack text-[#F4F4F6] font-sans antialiased selection:bg-copperAmber selection:text-matteBlack overflow-x-hidden">
 
@@ -317,337 +355,465 @@
           </div>
         </div>
 
-        <!-- Cabecera Atmosférica Difusa al seleccionar una categoría específica (se activa si hay fotos disponibles) -->
-        <div
-          id="categoryAtmosphericBanner"
-          class="hidden relative overflow-hidden rounded-2xl border border-copperAmber/35 mb-8 p-6 sm:p-8 transition-all duration-500"
-        >
-          <div
-            id="categoryBannerBg"
-            class="absolute -inset-4 bg-cover bg-center blur-md scale-105 opacity-35 transition-all duration-700"
-            aria-hidden="true"
-          ></div>
-          <div class="absolute inset-0 bg-[#D99B4E]/10 mix-blend-screen pointer-events-none" aria-hidden="true"></div>
-          <div class="absolute inset-0 bg-gradient-to-r from-matteBlack/95 via-matteBlack/80 to-matteBlack/70 pointer-events-none" aria-hidden="true"></div>
-
-          <div class="relative z-10 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
-            <div>
-              <span id="categoryBannerTag" class="font-mono text-[11px] uppercase tracking-widest text-copperLight block mb-1"></span>
-              <h3 id="categoryBannerTitle" class="font-display font-bold text-2xl sm:text-3xl text-[#F4F4F6]"></h3>
-            </div>
-            <button
-              type="button"
-              id="resetFilterBannerBtn"
-              class="self-start sm:self-center px-3.5 py-2 rounded-xl bg-matteBlack/80 hover:bg-matteBlack border border-subtleBorder hover:border-copperAmber/50 font-mono text-xs text-[#A1A1AA] hover:text-copperLight transition-colors cursor-pointer"
-            >
-              Ver todas las áreas
-            </button>
-          </div>
-        </div>
-
         <!-- Grilla 2x2 de Tarjetas Principales -->
         <div id="servicesGrid" class="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8">
 
           <!-- TARJETA 1: PRODUCCIÓN -->
-          <article data-category="produccion" class="service-card reveal-on-scroll group flex flex-col justify-between rounded-2xl bg-elevated border border-subtleBorder hover:border-copperAmber/50 p-6 sm:p-8 transition-all duration-300 shadow-xl shadow-black/30">
-            <div>
-              <div class="flex items-start justify-between gap-4 mb-6">
-                <div class="w-12 h-12 rounded-xl bg-matteBlack border border-subtleBorder group-hover:border-copperAmber/50 flex items-center justify-center text-copperAmber transition-colors">
-                  <svg class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                    <circle cx="8" cy="18" r="3" />
-                    <circle cx="18" cy="16" r="3" />
-                    <path d="M11 18V6l10-2v12" />
-                    <path d="M11 10l10-2" />
-                  </svg>
+          <article data-category="produccion" class="service-card reveal-on-scroll group flex flex-col justify-between overflow-hidden rounded-2xl bg-elevated border border-subtleBorder hover:border-copperAmber/50 transition-all duration-300 shadow-xl shadow-black/30">
+            <!-- Visor Composite de Categoría: Producción -->
+            <div
+              id="mediaBanner-produccion"
+              data-category-viewer="produccion"
+              class="hidden relative w-full h-[210px] composite-frame overflow-hidden border-b border-subtleBorder/70 select-none"
+            >
+              <img
+                src=""
+                alt="Producción — Agustín Copello en Islandia Estudio"
+                class="composite-photo w-full h-full object-cover object-center group-hover:scale-105 cursor-zoom-in"
+              />
+              <div class="composite-amber-tint absolute inset-0 pointer-events-none" aria-hidden="true"></div>
+              <div class="composite-surface-fade absolute inset-0 pointer-events-none" aria-hidden="true"></div>
+
+              <div class="viewer-controls absolute inset-x-3.5 bottom-3 z-10 flex items-center justify-between pointer-events-none">
+                <div class="viewer-dots flex items-center gap-1.5 px-2.5 py-1.5 rounded-full bg-matteBlack/70 backdrop-blur-sm border border-white/10 pointer-events-auto"></div>
+                <div class="viewer-arrows flex items-center gap-1.5 pointer-events-auto">
+                  <button
+                    type="button"
+                    data-viewer-prev="produccion"
+                    aria-label="Foto anterior de Producción"
+                    class="w-7 h-7 rounded-full bg-matteBlack/75 hover:bg-copperAmber text-[#F4F4F6] hover:text-matteBlack border border-white/10 flex items-center justify-center text-sm transition-colors cursor-pointer"
+                  >
+                    ‹
+                  </button>
+                  <button
+                    type="button"
+                    data-viewer-next="produccion"
+                    aria-label="Siguiente foto de Producción"
+                    class="w-7 h-7 rounded-full bg-matteBlack/75 hover:bg-copperAmber text-[#F4F4F6] hover:text-matteBlack border border-white/10 flex items-center justify-center text-sm transition-colors cursor-pointer"
+                  >
+                    ›
+                  </button>
                 </div>
-                <span class="font-mono text-xs px-3 py-1 rounded-full bg-matteBlack border border-subtleBorder text-[#A1A1AA] group-hover:text-copperLight transition-colors">
-                  01
-                </span>
               </div>
+            </div>
 
-              <span class="font-mono text-xs uppercase tracking-widest text-copperLight block mb-1.5">
-                Creación
-              </span>
-              <h3 class="font-display font-bold text-3xl sm:text-4xl text-[#F4F4F6] tracking-tight">
-                Producción
-              </h3>
-              <p class="mt-2.5 text-sm text-[#A1A1AA] leading-relaxed">
-                Desarrollo artístico integral, identidad y dirección creativa desde la composición hasta el lanzamiento.
-              </p>
+            <div class="p-6 sm:p-8 flex-1 flex flex-col justify-between">
+              <div>
+                <div class="flex items-start justify-between gap-4 mb-6">
+                  <div class="w-12 h-12 rounded-xl bg-matteBlack border border-subtleBorder group-hover:border-copperAmber/50 flex items-center justify-center text-copperAmber transition-colors">
+                    <svg class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                      <circle cx="8" cy="18" r="3" />
+                      <circle cx="18" cy="16" r="3" />
+                      <path d="M11 18V6l10-2v12" />
+                      <path d="M11 10l10-2" />
+                    </svg>
+                  </div>
+                  <span class="font-mono text-xs px-3 py-1 rounded-full bg-matteBlack border border-subtleBorder text-[#A1A1AA] group-hover:text-copperLight transition-colors">
+                    01
+                  </span>
+                </div>
 
-              <!-- Lista de servicios -->
-              <ul class="mt-6 space-y-2.5" aria-label="Servicios de Producción">
-                <li>
-                  <button
-                    type="button"
-                    data-select-area="Producción"
-                    data-select-service="Composición y arreglos"
-                    class="service-item-btn w-full flex items-center justify-between gap-3 px-4 py-3.5 rounded-xl bg-matteBlack/85 hover:bg-matteBlack border border-subtleBorder hover:border-copperAmber/45 text-left transition-all duration-200 group/item cursor-pointer"
-                  >
-                    <span class="flex items-center gap-3 text-sm sm:text-base font-medium text-[#F4F4F6] group-hover/item:text-white transition-colors">
-                      <span class="w-1.5 h-1.5 rounded-full bg-copperAmber"></span>
-                      Composición y arreglos
-                    </span>
-                    <span class="text-base text-[#A1A1AA] group-hover/item:text-copperLight group-hover/item:translate-x-1 transition-all duration-200" aria-hidden="true">
-                      →
-                    </span>
-                  </button>
-                </li>
-                <li>
-                  <button
-                    type="button"
-                    data-select-area="Producción"
-                    data-select-service="Sesiones en estudio/vivo"
-                    class="service-item-btn w-full flex items-center justify-between gap-3 px-4 py-3.5 rounded-xl bg-matteBlack/85 hover:bg-matteBlack border border-subtleBorder hover:border-copperAmber/45 text-left transition-all duration-200 group/item cursor-pointer"
-                  >
-                    <span class="flex items-center gap-3 text-sm sm:text-base font-medium text-[#F4F4F6] group-hover/item:text-white transition-colors">
-                      <span class="w-1.5 h-1.5 rounded-full bg-copperAmber"></span>
-                      Sesiones en estudio/vivo
-                    </span>
-                    <span class="text-base text-[#A1A1AA] group-hover/item:text-copperLight group-hover/item:translate-x-1 transition-all duration-200" aria-hidden="true">
-                      →
-                    </span>
-                  </button>
-                </li>
-                <li>
-                  <button
-                    type="button"
-                    data-select-area="Producción"
-                    data-select-service="Dirección de proyectos"
-                    class="service-item-btn w-full flex items-center justify-between gap-3 px-4 py-3.5 rounded-xl bg-matteBlack/85 hover:bg-matteBlack border border-subtleBorder hover:border-copperAmber/45 text-left transition-all duration-200 group/item cursor-pointer"
-                  >
-                    <span class="flex items-center gap-3 text-sm sm:text-base font-medium text-[#F4F4F6] group-hover/item:text-white transition-colors">
-                      <span class="w-1.5 h-1.5 rounded-full bg-copperAmber"></span>
-                      Dirección de proyectos
-                    </span>
-                    <span class="text-base text-[#A1A1AA] group-hover/item:text-copperLight group-hover/item:translate-x-1 transition-all duration-200" aria-hidden="true">
-                      →
-                    </span>
-                  </button>
-                </li>
-              </ul>
+                <span class="font-mono text-xs uppercase tracking-widest text-copperLight block mb-1.5">
+                  Creación
+                </span>
+                <h3 class="font-display font-bold text-3xl sm:text-4xl text-[#F4F4F6] tracking-tight">
+                  Producción
+                </h3>
+                <p class="mt-2.5 text-sm text-[#A1A1AA] leading-relaxed">
+                  Desarrollo artístico integral, identidad y dirección creativa desde la composición hasta el lanzamiento.
+                </p>
+
+                <!-- Lista de servicios -->
+                <ul class="mt-6 space-y-2.5" aria-label="Servicios de Producción">
+                  <li>
+                    <button
+                      type="button"
+                      data-select-area="Producción"
+                      data-select-service="Composición y arreglos"
+                      class="service-item-btn w-full flex items-center justify-between gap-3 px-4 py-3.5 rounded-xl bg-matteBlack/85 hover:bg-matteBlack border border-subtleBorder hover:border-copperAmber/45 text-left transition-all duration-200 group/item cursor-pointer"
+                    >
+                      <span class="flex items-center gap-3 text-sm sm:text-base font-medium text-[#F4F4F6] group-hover/item:text-white transition-colors">
+                        <span class="w-1.5 h-1.5 rounded-full bg-copperAmber"></span>
+                        Composición y arreglos
+                      </span>
+                      <span class="text-base text-[#A1A1AA] group-hover/item:text-copperLight group-hover/item:translate-x-1 transition-all duration-200" aria-hidden="true">
+                        →
+                      </span>
+                    </button>
+                  </li>
+                  <li>
+                    <button
+                      type="button"
+                      data-select-area="Producción"
+                      data-select-service="Sesiones en estudio/vivo"
+                      class="service-item-btn w-full flex items-center justify-between gap-3 px-4 py-3.5 rounded-xl bg-matteBlack/85 hover:bg-matteBlack border border-subtleBorder hover:border-copperAmber/45 text-left transition-all duration-200 group/item cursor-pointer"
+                    >
+                      <span class="flex items-center gap-3 text-sm sm:text-base font-medium text-[#F4F4F6] group-hover/item:text-white transition-colors">
+                        <span class="w-1.5 h-1.5 rounded-full bg-copperAmber"></span>
+                        Sesiones en estudio/vivo
+                      </span>
+                      <span class="text-base text-[#A1A1AA] group-hover/item:text-copperLight group-hover/item:translate-x-1 transition-all duration-200" aria-hidden="true">
+                        →
+                      </span>
+                    </button>
+                  </li>
+                  <li>
+                    <button
+                      type="button"
+                      data-select-area="Producción"
+                      data-select-service="Dirección de proyectos"
+                      class="service-item-btn w-full flex items-center justify-between gap-3 px-4 py-3.5 rounded-xl bg-matteBlack/85 hover:bg-matteBlack border border-subtleBorder hover:border-copperAmber/45 text-left transition-all duration-200 group/item cursor-pointer"
+                    >
+                      <span class="flex items-center gap-3 text-sm sm:text-base font-medium text-[#F4F4F6] group-hover/item:text-white transition-colors">
+                        <span class="w-1.5 h-1.5 rounded-full bg-copperAmber"></span>
+                        Dirección de proyectos
+                      </span>
+                      <span class="text-base text-[#A1A1AA] group-hover/item:text-copperLight group-hover/item:translate-x-1 transition-all duration-200" aria-hidden="true">
+                        →
+                      </span>
+                    </button>
+                  </li>
+                </ul>
+              </div>
             </div>
           </article>
 
           <!-- TARJETA 2: AUDIO (SIN etiqueta superior) -->
-          <article data-category="audio" class="service-card reveal-on-scroll group flex flex-col justify-between rounded-2xl bg-elevated border border-subtleBorder hover:border-copperAmber/50 p-6 sm:p-8 transition-all duration-300 shadow-xl shadow-black/30">
-            <div>
-              <div class="flex items-start justify-between gap-4 mb-6">
-                <div class="w-12 h-12 rounded-xl bg-matteBlack border border-subtleBorder group-hover:border-copperAmber/50 flex items-center justify-center text-copperAmber transition-colors">
-                  <svg class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                    <line x1="4" y1="21" x2="4" y2="14" />
-                    <line x1="4" y1="10" x2="4" y2="3" />
-                    <line x1="12" y1="21" x2="12" y2="12" />
-                    <line x1="12" y1="8" x2="12" y2="3" />
-                    <line x1="20" y1="21" x2="20" y2="16" />
-                    <line x1="20" y1="12" x2="20" y2="3" />
-                    <line x1="2" y1="14" x2="6" y2="14" />
-                    <line x1="10" y1="8" x2="14" y2="8" />
-                    <line x1="18" y1="16" x2="22" y2="16" />
-                  </svg>
+          <article data-category="audio" class="service-card reveal-on-scroll group flex flex-col justify-between overflow-hidden rounded-2xl bg-elevated border border-subtleBorder hover:border-copperAmber/50 transition-all duration-300 shadow-xl shadow-black/30">
+            <!-- Visor Composite de Categoría: Audio -->
+            <div
+              id="mediaBanner-audio"
+              data-category-viewer="audio"
+              class="hidden relative w-full h-[210px] composite-frame overflow-hidden border-b border-subtleBorder/70 select-none"
+            >
+              <img
+                src=""
+                alt="Audio — Grabación, Mezcla y Mastering en Islandia Estudio"
+                class="composite-photo w-full h-full object-cover object-center group-hover:scale-105 cursor-zoom-in"
+              />
+              <div class="composite-amber-tint absolute inset-0 pointer-events-none" aria-hidden="true"></div>
+              <div class="composite-surface-fade absolute inset-0 pointer-events-none" aria-hidden="true"></div>
+
+              <div class="viewer-controls absolute inset-x-3.5 bottom-3 z-10 flex items-center justify-between pointer-events-none">
+                <div class="viewer-dots flex items-center gap-1.5 px-2.5 py-1.5 rounded-full bg-matteBlack/70 backdrop-blur-sm border border-white/10 pointer-events-auto"></div>
+                <div class="viewer-arrows flex items-center gap-1.5 pointer-events-auto">
+                  <button
+                    type="button"
+                    data-viewer-prev="audio"
+                    aria-label="Foto anterior de Audio"
+                    class="w-7 h-7 rounded-full bg-matteBlack/75 hover:bg-copperAmber text-[#F4F4F6] hover:text-matteBlack border border-white/10 flex items-center justify-center text-sm transition-colors cursor-pointer"
+                  >
+                    ‹
+                  </button>
+                  <button
+                    type="button"
+                    data-viewer-next="audio"
+                    aria-label="Siguiente foto de Audio"
+                    class="w-7 h-7 rounded-full bg-matteBlack/75 hover:bg-copperAmber text-[#F4F4F6] hover:text-matteBlack border border-white/10 flex items-center justify-center text-sm transition-colors cursor-pointer"
+                  >
+                    ›
+                  </button>
                 </div>
-                <span class="font-mono text-xs px-3 py-1 rounded-full bg-matteBlack border border-subtleBorder text-[#A1A1AA] group-hover:text-copperLight transition-colors">
-                  02
-                </span>
               </div>
+            </div>
 
-              <h3 class="font-display font-bold text-3xl sm:text-4xl text-[#F4F4F6] tracking-tight">
-                Audio
-              </h3>
-              <p class="mt-2.5 text-sm text-[#A1A1AA] leading-relaxed">
-                Sistema híbrido Analógico-Digital para lograr profundidad, dinámica y traducción en cualquier sistema.
-              </p>
+            <div class="p-6 sm:p-8 flex-1 flex flex-col justify-between">
+              <div>
+                <div class="flex items-start justify-between gap-4 mb-6">
+                  <div class="w-12 h-12 rounded-xl bg-matteBlack border border-subtleBorder group-hover:border-copperAmber/50 flex items-center justify-center text-copperAmber transition-colors">
+                    <svg class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                      <line x1="4" y1="21" x2="4" y2="14" />
+                      <line x1="4" y1="10" x2="4" y2="3" />
+                      <line x1="12" y1="21" x2="12" y2="12" />
+                      <line x1="12" y1="8" x2="12" y2="3" />
+                      <line x1="20" y1="21" x2="20" y2="16" />
+                      <line x1="20" y1="12" x2="20" y2="3" />
+                      <line x1="2" y1="14" x2="6" y2="14" />
+                      <line x1="10" y1="8" x2="14" y2="8" />
+                      <line x1="18" y1="16" x2="22" y2="16" />
+                    </svg>
+                  </div>
+                  <span class="font-mono text-xs px-3 py-1 rounded-full bg-matteBlack border border-subtleBorder text-[#A1A1AA] group-hover:text-copperLight transition-colors">
+                    02
+                  </span>
+                </div>
 
-              <!-- Lista de servicios -->
-              <ul class="mt-6 space-y-2.5" aria-label="Servicios de Audio">
-                <li>
-                  <button
-                    type="button"
-                    data-select-area="Audio"
-                    data-select-service="Grabación"
-                    class="service-item-btn w-full flex items-center justify-between gap-3 px-4 py-3.5 rounded-xl bg-matteBlack/85 hover:bg-matteBlack border border-subtleBorder hover:border-copperAmber/45 text-left transition-all duration-200 group/item cursor-pointer"
-                  >
-                    <span class="flex items-center gap-3 text-sm sm:text-base font-medium text-[#F4F4F6] group-hover/item:text-white transition-colors">
-                      <span class="w-1.5 h-1.5 rounded-full bg-copperAmber"></span>
-                      Grabación
-                    </span>
-                    <span class="text-base text-[#A1A1AA] group-hover/item:text-copperLight group-hover/item:translate-x-1 transition-all duration-200" aria-hidden="true">
-                      →
-                    </span>
-                  </button>
-                </li>
-                <li>
-                  <button
-                    type="button"
-                    data-select-area="Audio"
-                    data-select-service="Mezcla y Mastering"
-                    class="service-item-btn w-full flex items-center justify-between gap-3 px-4 py-3.5 rounded-xl bg-matteBlack/85 hover:bg-matteBlack border border-subtleBorder hover:border-copperAmber/45 text-left transition-all duration-200 group/item cursor-pointer"
-                  >
-                    <span class="flex items-center gap-3 text-sm sm:text-base font-medium text-[#F4F4F6] group-hover/item:text-white transition-colors">
-                      <span class="w-1.5 h-1.5 rounded-full bg-copperAmber"></span>
-                      Mezcla y Mastering
-                    </span>
-                    <span class="text-base text-[#A1A1AA] group-hover/item:text-copperLight group-hover/item:translate-x-1 transition-all duration-200" aria-hidden="true">
-                      →
-                    </span>
-                  </button>
-                </li>
-              </ul>
+                <h3 class="font-display font-bold text-3xl sm:text-4xl text-[#F4F4F6] tracking-tight">
+                  Audio
+                </h3>
+                <p class="mt-2.5 text-sm text-[#A1A1AA] leading-relaxed">
+                  Sistema híbrido Analógico-Digital para lograr profundidad, dinámica y traducción en cualquier sistema.
+                </p>
+
+                <!-- Lista de servicios -->
+                <ul class="mt-6 space-y-2.5" aria-label="Servicios de Audio">
+                  <li>
+                    <button
+                      type="button"
+                      data-select-area="Audio"
+                      data-select-service="Grabación"
+                      class="service-item-btn w-full flex items-center justify-between gap-3 px-4 py-3.5 rounded-xl bg-matteBlack/85 hover:bg-matteBlack border border-subtleBorder hover:border-copperAmber/45 text-left transition-all duration-200 group/item cursor-pointer"
+                    >
+                      <span class="flex items-center gap-3 text-sm sm:text-base font-medium text-[#F4F4F6] group-hover/item:text-white transition-colors">
+                        <span class="w-1.5 h-1.5 rounded-full bg-copperAmber"></span>
+                        Grabación
+                      </span>
+                      <span class="text-base text-[#A1A1AA] group-hover/item:text-copperLight group-hover/item:translate-x-1 transition-all duration-200" aria-hidden="true">
+                        →
+                      </span>
+                    </button>
+                  </li>
+                  <li>
+                    <button
+                      type="button"
+                      data-select-area="Audio"
+                      data-select-service="Mezcla y Mastering"
+                      class="service-item-btn w-full flex items-center justify-between gap-3 px-4 py-3.5 rounded-xl bg-matteBlack/85 hover:bg-matteBlack border border-subtleBorder hover:border-copperAmber/45 text-left transition-all duration-200 group/item cursor-pointer"
+                    >
+                      <span class="flex items-center gap-3 text-sm sm:text-base font-medium text-[#F4F4F6] group-hover/item:text-white transition-colors">
+                        <span class="w-1.5 h-1.5 rounded-full bg-copperAmber"></span>
+                        Mezcla y Mastering
+                      </span>
+                      <span class="text-base text-[#A1A1AA] group-hover/item:text-copperLight group-hover/item:translate-x-1 transition-all duration-200" aria-hidden="true">
+                        →
+                      </span>
+                    </button>
+                  </li>
+                </ul>
+              </div>
             </div>
           </article>
 
           <!-- TARJETA 3: TUTORÍAS -->
-          <article data-category="tutorias" class="service-card reveal-on-scroll group flex flex-col justify-between rounded-2xl bg-elevated border border-subtleBorder hover:border-copperAmber/50 p-6 sm:p-8 transition-all duration-300 shadow-xl shadow-black/30">
-            <div>
-              <div class="flex items-start justify-between gap-4 mb-6">
-                <div class="w-12 h-12 rounded-xl bg-matteBlack border border-subtleBorder group-hover:border-copperAmber/50 flex items-center justify-center text-copperAmber transition-colors">
-                  <svg class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                    <path d="M3 18v-6a9 9 0 0 1 18 0v6" />
-                    <path d="M21 19a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3zM3 19a2 2 0 0 0 2 2h1a2 2 0 0 0 2-2v-3a2 2 0 0 0-2-2H3z" />
-                  </svg>
+          <article data-category="tutorias" class="service-card reveal-on-scroll group flex flex-col justify-between overflow-hidden rounded-2xl bg-elevated border border-subtleBorder hover:border-copperAmber/50 transition-all duration-300 shadow-xl shadow-black/30">
+            <!-- Visor Composite de Categoría: Tutorías -->
+            <div
+              id="mediaBanner-tutorias"
+              data-category-viewer="tutorias"
+              class="hidden relative w-full h-[210px] composite-frame overflow-hidden border-b border-subtleBorder/70 select-none"
+            >
+              <img
+                src=""
+                alt="Tutorías — Clases Personalizadas y Workshops"
+                class="composite-photo w-full h-full object-cover object-center group-hover:scale-105 cursor-zoom-in"
+              />
+              <div class="composite-amber-tint absolute inset-0 pointer-events-none" aria-hidden="true"></div>
+              <div class="composite-surface-fade absolute inset-0 pointer-events-none" aria-hidden="true"></div>
+
+              <div class="viewer-controls absolute inset-x-3.5 bottom-3 z-10 flex items-center justify-between pointer-events-none">
+                <div class="viewer-dots flex items-center gap-1.5 px-2.5 py-1.5 rounded-full bg-matteBlack/70 backdrop-blur-sm border border-white/10 pointer-events-auto"></div>
+                <div class="viewer-arrows flex items-center gap-1.5 pointer-events-auto">
+                  <button
+                    type="button"
+                    data-viewer-prev="tutorias"
+                    aria-label="Foto anterior de Tutorías"
+                    class="w-7 h-7 rounded-full bg-matteBlack/75 hover:bg-copperAmber text-[#F4F4F6] hover:text-matteBlack border border-white/10 flex items-center justify-center text-sm transition-colors cursor-pointer"
+                  >
+                    ‹
+                  </button>
+                  <button
+                    type="button"
+                    data-viewer-next="tutorias"
+                    aria-label="Siguiente foto de Tutorías"
+                    class="w-7 h-7 rounded-full bg-matteBlack/75 hover:bg-copperAmber text-[#F4F4F6] hover:text-matteBlack border border-white/10 flex items-center justify-center text-sm transition-colors cursor-pointer"
+                  >
+                    ›
+                  </button>
                 </div>
-                <span class="font-mono text-xs px-3 py-1 rounded-full bg-matteBlack border border-subtleBorder text-[#A1A1AA] group-hover:text-copperLight transition-colors">
-                  03
-                </span>
               </div>
+            </div>
 
-              <span class="font-mono text-xs uppercase tracking-widest text-copperLight block mb-1.5">
-                Formación
-              </span>
-              <h3 class="font-display font-bold text-3xl sm:text-4xl text-[#F4F4F6] tracking-tight">
-                Tutorías
-              </h3>
-              <p class="mt-2.5 text-sm text-[#A1A1AA] leading-relaxed">
-                Acompañamiento técnico y creativo adaptado a tus objetivos artísticos y de estudio.
-              </p>
+            <div class="p-6 sm:p-8 flex-1 flex flex-col justify-between">
+              <div>
+                <div class="flex items-start justify-between gap-4 mb-6">
+                  <div class="w-12 h-12 rounded-xl bg-matteBlack border border-subtleBorder group-hover:border-copperAmber/50 flex items-center justify-center text-copperAmber transition-colors">
+                    <svg class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                      <path d="M3 18v-6a9 9 0 0 1 18 0v6" />
+                      <path d="M21 19a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3zM3 19a2 2 0 0 0 2 2h1a2 2 0 0 0 2-2v-3a2 2 0 0 0-2-2H3z" />
+                    </svg>
+                  </div>
+                  <span class="font-mono text-xs px-3 py-1 rounded-full bg-matteBlack border border-subtleBorder text-[#A1A1AA] group-hover:text-copperLight transition-colors">
+                    03
+                  </span>
+                </div>
 
-              <!-- Lista de servicios -->
-              <ul class="mt-6 space-y-2.5" aria-label="Servicios de Tutorías">
-                <li>
-                  <button
-                    type="button"
-                    data-select-area="Tutorías"
-                    data-select-service="Clases Personalizadas"
-                    class="service-item-btn w-full flex items-center justify-between gap-3 px-4 py-3.5 rounded-xl bg-matteBlack/85 hover:bg-matteBlack border border-subtleBorder hover:border-copperAmber/45 text-left transition-all duration-200 group/item cursor-pointer"
-                  >
-                    <span class="flex items-center gap-3 text-sm sm:text-base font-medium text-[#F4F4F6] group-hover/item:text-white transition-colors">
-                      <span class="w-1.5 h-1.5 rounded-full bg-copperAmber"></span>
-                      Clases Personalizadas
-                    </span>
-                    <span class="text-base text-[#A1A1AA] group-hover/item:text-copperLight group-hover/item:translate-x-1 transition-all duration-200" aria-hidden="true">
-                      →
-                    </span>
-                  </button>
-                </li>
-                <li>
-                  <button
-                    type="button"
-                    data-select-area="Tutorías"
-                    data-select-service="Workshops"
-                    class="service-item-btn w-full flex items-center justify-between gap-3 px-4 py-3.5 rounded-xl bg-matteBlack/85 hover:bg-matteBlack border border-subtleBorder hover:border-copperAmber/45 text-left transition-all duration-200 group/item cursor-pointer"
-                  >
-                    <span class="flex items-center gap-3 text-sm sm:text-base font-medium text-[#F4F4F6] group-hover/item:text-white transition-colors">
-                      <span class="w-1.5 h-1.5 rounded-full bg-copperAmber"></span>
-                      Workshops
-                    </span>
-                    <span class="text-base text-[#A1A1AA] group-hover/item:text-copperLight group-hover/item:translate-x-1 transition-all duration-200" aria-hidden="true">
-                      →
-                    </span>
-                  </button>
-                </li>
-              </ul>
+                <span class="font-mono text-xs uppercase tracking-widest text-copperLight block mb-1.5">
+                  Formación
+                </span>
+                <h3 class="font-display font-bold text-3xl sm:text-4xl text-[#F4F4F6] tracking-tight">
+                  Tutorías
+                </h3>
+                <p class="mt-2.5 text-sm text-[#A1A1AA] leading-relaxed">
+                  Acompañamiento personalizado y espacios prácticos de formación en producción musical, flujo de trabajo en estudio y herramientas de audio.
+                </p>
+
+                <!-- Lista de servicios -->
+                <ul class="mt-6 space-y-2.5" aria-label="Servicios de Tutorías">
+                  <li>
+                    <button
+                      type="button"
+                      data-select-area="Tutorías"
+                      data-select-service="Clases Personalizadas"
+                      class="service-item-btn w-full flex items-center justify-between gap-3 px-4 py-3.5 rounded-xl bg-matteBlack/85 hover:bg-matteBlack border border-subtleBorder hover:border-copperAmber/45 text-left transition-all duration-200 group/item cursor-pointer"
+                    >
+                      <span class="flex items-center gap-3 text-sm sm:text-base font-medium text-[#F4F4F6] group-hover/item:text-white transition-colors">
+                        <span class="w-1.5 h-1.5 rounded-full bg-copperAmber"></span>
+                        Clases Personalizadas
+                      </span>
+                      <span class="text-base text-[#A1A1AA] group-hover/item:text-copperLight group-hover/item:translate-x-1 transition-all duration-200" aria-hidden="true">
+                        →
+                      </span>
+                    </button>
+                  </li>
+                  <li>
+                    <button
+                      type="button"
+                      data-select-area="Tutorías"
+                      data-select-service="Workshops"
+                      class="service-item-btn w-full flex items-center justify-between gap-3 px-4 py-3.5 rounded-xl bg-matteBlack/85 hover:bg-matteBlack border border-subtleBorder hover:border-copperAmber/45 text-left transition-all duration-200 group/item cursor-pointer"
+                    >
+                      <span class="flex items-center gap-3 text-sm sm:text-base font-medium text-[#F4F4F6] group-hover/item:text-white transition-colors">
+                        <span class="w-1.5 h-1.5 rounded-full bg-copperAmber"></span>
+                        Workshops
+                      </span>
+                      <span class="text-base text-[#A1A1AA] group-hover/item:text-copperLight group-hover/item:translate-x-1 transition-all duration-200" aria-hidden="true">
+                        →
+                      </span>
+                    </button>
+                  </li>
+                </ul>
+              </div>
             </div>
           </article>
 
           <!-- TARJETA 4: GEAR (SIN etiqueta superior) -->
-          <article data-category="gear" class="service-card reveal-on-scroll group flex flex-col justify-between rounded-2xl bg-elevated border border-subtleBorder hover:border-copperAmber/50 p-6 sm:p-8 transition-all duration-300 shadow-xl shadow-black/30">
-            <div>
-              <div class="flex items-start justify-between gap-4 mb-6">
-                <div class="w-12 h-12 rounded-xl bg-matteBlack border border-subtleBorder group-hover:border-copperAmber/50 flex items-center justify-center text-copperAmber transition-colors">
-                  <svg class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                    <circle cx="12" cy="12" r="3" />
-                    <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z" />
-                  </svg>
+          <article data-category="gear" class="service-card reveal-on-scroll group flex flex-col justify-between overflow-hidden rounded-2xl bg-elevated border border-subtleBorder hover:border-copperAmber/50 transition-all duration-300 shadow-xl shadow-black/30">
+            <!-- Visor Composite de Categoría: Gear -->
+            <div
+              id="mediaBanner-gear"
+              data-category-viewer="gear"
+              class="hidden relative w-full h-[210px] composite-frame overflow-hidden border-b border-subtleBorder/70 select-none"
+            >
+              <img
+                src=""
+                alt="Gear — Equipamiento y Acústica en Islandia Estudio"
+                class="composite-photo w-full h-full object-cover object-center group-hover:scale-105 cursor-zoom-in"
+              />
+              <div class="composite-amber-tint absolute inset-0 pointer-events-none" aria-hidden="true"></div>
+              <div class="composite-surface-fade absolute inset-0 pointer-events-none" aria-hidden="true"></div>
+
+              <div class="viewer-controls absolute inset-x-3.5 bottom-3 z-10 flex items-center justify-between pointer-events-none">
+                <div class="viewer-dots flex items-center gap-1.5 px-2.5 py-1.5 rounded-full bg-matteBlack/70 backdrop-blur-sm border border-white/10 pointer-events-auto"></div>
+                <div class="viewer-arrows flex items-center gap-1.5 pointer-events-auto">
+                  <button
+                    type="button"
+                    data-viewer-prev="gear"
+                    aria-label="Foto anterior de Gear"
+                    class="w-7 h-7 rounded-full bg-matteBlack/75 hover:bg-copperAmber text-[#F4F4F6] hover:text-matteBlack border border-white/10 flex items-center justify-center text-sm transition-colors cursor-pointer"
+                  >
+                    ‹
+                  </button>
+                  <button
+                    type="button"
+                    data-viewer-next="gear"
+                    aria-label="Siguiente foto de Gear"
+                    class="w-7 h-7 rounded-full bg-matteBlack/75 hover:bg-copperAmber text-[#F4F4F6] hover:text-matteBlack border border-white/10 flex items-center justify-center text-sm transition-colors cursor-pointer"
+                  >
+                    ›
+                  </button>
                 </div>
-                <span class="font-mono text-xs px-3 py-1 rounded-full bg-matteBlack border border-subtleBorder text-[#A1A1AA] group-hover:text-copperLight transition-colors">
-                  04
-                </span>
               </div>
+            </div>
 
-              <h3 class="font-display font-bold text-3xl sm:text-4xl text-[#F4F4F6] tracking-tight">
-                Gear
-              </h3>
-              <p class="mt-2.5 text-sm text-[#A1A1AA] leading-relaxed">
-                Soporte técnico especializado, puesta a punto de instrumentos, recomendaciones y venta de equipamiento y acondicionamiento acústico.
-              </p>
+            <div class="p-6 sm:p-8 flex-1 flex flex-col justify-between">
+              <div>
+                <div class="flex items-start justify-between gap-4 mb-6">
+                  <div class="w-12 h-12 rounded-xl bg-matteBlack border border-subtleBorder group-hover:border-copperAmber/50 flex items-center justify-center text-copperAmber transition-colors">
+                    <svg class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                      <circle cx="12" cy="12" r="3" />
+                      <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z" />
+                    </svg>
+                  </div>
+                  <span class="font-mono text-xs px-3 py-1 rounded-full bg-matteBlack border border-subtleBorder text-[#A1A1AA] group-hover:text-copperLight transition-colors">
+                    04
+                  </span>
+                </div>
 
-              <!-- Lista de servicios -->
-              <ul class="mt-6 space-y-2.5" aria-label="Servicios de Gear">
-                <li>
-                  <button
-                    type="button"
-                    data-select-area="Gear"
-                    data-select-service="Mantenimiento de Instrumentos"
-                    class="service-item-btn w-full flex items-center justify-between gap-3 px-4 py-3.5 rounded-xl bg-matteBlack/85 hover:bg-matteBlack border border-subtleBorder hover:border-copperAmber/45 text-left transition-all duration-200 group/item cursor-pointer"
-                  >
-                    <span class="flex items-center gap-3 text-sm sm:text-base font-medium text-[#F4F4F6] group-hover/item:text-white transition-colors">
-                      <span class="w-1.5 h-1.5 rounded-full bg-copperAmber"></span>
-                      Mantenimiento de Instrumentos
-                    </span>
-                    <span class="text-base text-[#A1A1AA] group-hover/item:text-copperLight group-hover/item:translate-x-1 transition-all duration-200" aria-hidden="true">
-                      →
-                    </span>
-                  </button>
-                </li>
-                <li>
-                  <button
-                    type="button"
-                    data-select-area="Gear"
-                    data-select-service="Soluciones Técnicas"
-                    class="service-item-btn w-full flex items-center justify-between gap-3 px-4 py-3.5 rounded-xl bg-matteBlack/85 hover:bg-matteBlack border border-subtleBorder hover:border-copperAmber/45 text-left transition-all duration-200 group/item cursor-pointer"
-                  >
-                    <span class="flex items-center gap-3 text-sm sm:text-base font-medium text-[#F4F4F6] group-hover/item:text-white transition-colors">
-                      <span class="w-1.5 h-1.5 rounded-full bg-copperAmber"></span>
-                      Soluciones Técnicas
-                    </span>
-                    <span class="text-base text-[#A1A1AA] group-hover/item:text-copperLight group-hover/item:translate-x-1 transition-all duration-200" aria-hidden="true">
-                      →
-                    </span>
-                  </button>
-                </li>
-                <li>
-                  <button
-                    type="button"
-                    data-select-area="Gear"
-                    data-select-service="Asesoramiento y Retail"
-                    class="service-item-btn w-full flex items-center justify-between gap-3 px-4 py-3.5 rounded-xl bg-matteBlack/85 hover:bg-matteBlack border border-subtleBorder hover:border-copperAmber/45 text-left transition-all duration-200 group/item cursor-pointer"
-                  >
-                    <span class="flex items-center gap-3 text-sm sm:text-base font-medium text-[#F4F4F6] group-hover/item:text-white transition-colors">
-                      <span class="w-1.5 h-1.5 rounded-full bg-copperAmber"></span>
-                      Asesoramiento y Retail
-                    </span>
-                    <span class="text-base text-[#A1A1AA] group-hover/item:text-copperLight group-hover/item:translate-x-1 transition-all duration-200" aria-hidden="true">
-                      →
-                    </span>
-                  </button>
-                </li>
-                <li>
-                  <button
-                    type="button"
-                    data-select-area="Gear"
-                    data-select-service="Acústica"
-                    class="service-item-btn w-full flex items-center justify-between gap-3 px-4 py-3.5 rounded-xl bg-matteBlack/85 hover:bg-matteBlack border border-subtleBorder hover:border-copperAmber/45 text-left transition-all duration-200 group/item cursor-pointer"
-                  >
-                    <span class="flex items-center gap-3 text-sm sm:text-base font-medium text-[#F4F4F6] group-hover/item:text-white transition-colors">
-                      <span class="w-1.5 h-1.5 rounded-full bg-copperAmber"></span>
-                      Acústica
-                    </span>
-                    <span class="text-base text-[#A1A1AA] group-hover/item:text-copperLight group-hover/item:translate-x-1 transition-all duration-200" aria-hidden="true">
-                      →
-                    </span>
-                  </button>
-                </li>
-              </ul>
+                <h3 class="font-display font-bold text-3xl sm:text-4xl text-[#F4F4F6] tracking-tight">
+                  Gear
+                </h3>
+                <p class="mt-2.5 text-sm text-[#A1A1AA] leading-relaxed">
+                  Soporte técnico especializado, puesta a punto de instrumentos, recomendaciones y venta de equipamiento y acondicionamiento acústico.
+                </p>
+
+                <!-- Lista de servicios -->
+                <ul class="mt-6 space-y-2.5" aria-label="Servicios de Gear">
+                  <li>
+                    <button
+                      type="button"
+                      data-select-area="Gear"
+                      data-select-service="Mantenimiento de Instrumentos"
+                      class="service-item-btn w-full flex items-center justify-between gap-3 px-4 py-3.5 rounded-xl bg-matteBlack/85 hover:bg-matteBlack border border-subtleBorder hover:border-copperAmber/45 text-left transition-all duration-200 group/item cursor-pointer"
+                    >
+                      <span class="flex items-center gap-3 text-sm sm:text-base font-medium text-[#F4F4F6] group-hover/item:text-white transition-colors">
+                        <span class="w-1.5 h-1.5 rounded-full bg-copperAmber"></span>
+                        Mantenimiento de Instrumentos
+                      </span>
+                      <span class="text-base text-[#A1A1AA] group-hover/item:text-copperLight group-hover/item:translate-x-1 transition-all duration-200" aria-hidden="true">
+                        →
+                      </span>
+                    </button>
+                  </li>
+                  <li>
+                    <button
+                      type="button"
+                      data-select-area="Gear"
+                      data-select-service="Soluciones Técnicas"
+                      class="service-item-btn w-full flex items-center justify-between gap-3 px-4 py-3.5 rounded-xl bg-matteBlack/85 hover:bg-matteBlack border border-subtleBorder hover:border-copperAmber/45 text-left transition-all duration-200 group/item cursor-pointer"
+                    >
+                      <span class="flex items-center gap-3 text-sm sm:text-base font-medium text-[#F4F4F6] group-hover/item:text-white transition-colors">
+                        <span class="w-1.5 h-1.5 rounded-full bg-copperAmber"></span>
+                        Soluciones Técnicas
+                      </span>
+                      <span class="text-base text-[#A1A1AA] group-hover/item:text-copperLight group-hover/item:translate-x-1 transition-all duration-200" aria-hidden="true">
+                        →
+                      </span>
+                    </button>
+                  </li>
+                  <li>
+                    <button
+                      type="button"
+                      data-select-area="Gear"
+                      data-select-service="Asesoramiento y Retail"
+                      class="service-item-btn w-full flex items-center justify-between gap-3 px-4 py-3.5 rounded-xl bg-matteBlack/85 hover:bg-matteBlack border border-subtleBorder hover:border-copperAmber/45 text-left transition-all duration-200 group/item cursor-pointer"
+                    >
+                      <span class="flex items-center gap-3 text-sm sm:text-base font-medium text-[#F4F4F6] group-hover/item:text-white transition-colors">
+                        <span class="w-1.5 h-1.5 rounded-full bg-copperAmber"></span>
+                        Asesoramiento y Retail
+                      </span>
+                      <span class="text-base text-[#A1A1AA] group-hover/item:text-copperLight group-hover/item:translate-x-1 transition-all duration-200" aria-hidden="true">
+                        →
+                      </span>
+                    </button>
+                  </li>
+                  <li>
+                    <button
+                      type="button"
+                      data-select-area="Gear"
+                      data-select-service="Acústica"
+                      class="service-item-btn w-full flex items-center justify-between gap-3 px-4 py-3.5 rounded-xl bg-matteBlack/85 hover:bg-matteBlack border border-subtleBorder hover:border-copperAmber/45 text-left transition-all duration-200 group/item cursor-pointer"
+                    >
+                      <span class="flex items-center gap-3 text-sm sm:text-base font-medium text-[#F4F4F6] group-hover/item:text-white transition-colors">
+                        <span class="w-1.5 h-1.5 rounded-full bg-copperAmber"></span>
+                        Acústica
+                      </span>
+                      <span class="text-base text-[#A1A1AA] group-hover/item:text-copperLight group-hover/item:translate-x-1 transition-all duration-200" aria-hidden="true">
+                        →
+                      </span>
+                    </button>
+                  </li>
+                </ul>
+              </div>
             </div>
           </article>
 
@@ -1030,24 +1196,88 @@
     </svg>
   </a>
 
+  <!-- ==================== 9. VISOR MODAL AMPLIADO (COMPOSITE LIGHTBOX) ==================== -->
+  <div
+    id="photoLightboxModal"
+    role="dialog"
+    aria-modal="true"
+    aria-labelledby="lightboxTitle"
+    class="hidden fixed inset-0 z-50 bg-matteBlack/90 backdrop-blur-md flex items-center justify-center p-4 sm:p-6"
+  >
+    <div class="relative w-full max-w-4xl rounded-2xl bg-elevated border border-copperAmber/35 overflow-hidden shadow-2xl">
+      <!-- Barra superior del modal -->
+      <div class="px-5 py-3.5 bg-matteBlack/90 border-b border-subtleBorder flex items-center justify-between gap-4">
+        <div class="flex items-center gap-3">
+          <span class="w-2 h-2 rounded-full bg-copperAmber"></span>
+          <h3 id="lightboxTitle" class="font-display font-bold text-xl text-[#F4F4F6]"></h3>
+          <span id="lightboxCounter" class="font-mono text-xs text-copperLight"></span>
+        </div>
+        <button
+          id="lightboxCloseBtn"
+          type="button"
+          aria-label="Cerrar vista ampliada"
+          class="w-8 h-8 rounded-lg bg-elevated hover:bg-copperAmber text-[#A1A1AA] hover:text-matteBlack border border-subtleBorder flex items-center justify-center text-sm font-mono transition-colors cursor-pointer"
+        >
+          ✕
+        </button>
+      </div>
+
+      <!-- Contenedor fotográfico con tratamiento composite -->
+      <div class="relative w-full h-[55vh] sm:h-[68vh] composite-frame overflow-hidden flex items-center justify-center">
+        <img
+          id="lightboxImg"
+          src=""
+          alt=""
+          class="composite-photo w-full h-full object-contain"
+        />
+        <div class="composite-amber-tint absolute inset-0 pointer-events-none" aria-hidden="true"></div>
+        <div class="composite-modal-fade absolute inset-0 pointer-events-none" aria-hidden="true"></div>
+
+        <button
+          id="lightboxPrevBtn"
+          type="button"
+          aria-label="Foto anterior"
+          class="absolute left-3 sm:left-5 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-matteBlack/80 hover:bg-copperAmber text-[#F4F4F6] hover:text-matteBlack border border-white/15 flex items-center justify-center text-lg transition-colors cursor-pointer"
+        >
+          ‹
+        </button>
+        <button
+          id="lightboxNextBtn"
+          type="button"
+          aria-label="Siguiente foto"
+          class="absolute right-3 sm:right-5 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-matteBlack/80 hover:bg-copperAmber text-[#F4F4F6] hover:text-matteBlack border border-white/15 flex items-center justify-center text-lg transition-colors cursor-pointer"
+        >
+          ›
+        </button>
+      </div>
+    </div>
+  </div>
+
   <!-- ==================== JAVASCRIPT INTERACTIVO ==================== -->
   <script>
     (function () {
       'use strict';
 
-      // 1. Sistema de Fotos listo para GitHub Pages (intenta "fotos/fotoX.jpg" y luego "fotoX.jpg" en la raíz)
-      const STUDIO_PHOTOS = [
-        { category: 'produccion', file: 'foto1.jpg' },
-        { category: 'produccion', file: 'foto2.jpg' },
-        { category: 'produccion', file: 'foto3.jpg' },
-        { category: 'audio',      file: 'foto4.jpg' },
-        { category: 'audio',      file: 'foto5.jpg' },
-        { category: 'audio',      file: 'foto6.jpg' },
-        { category: 'tutorias',   file: 'foto7.jpg' },
-        { category: 'gear',       file: 'foto8.jpg' },
-        { category: 'gear',       file: 'foto9.jpg' },
-        { category: 'gear',       file: 'foto10.jpg' }
-      ];
+      // 1. Mapeo de Fotos por Categoría (busca en "fotos/<nombre>" y en la raíz "<nombre>")
+      const CATEGORY_PHOTOS = {
+        produccion: [
+          { primary: 'prod-1.jpg', fallback: 'foto3.jpg' },
+          { primary: 'prod-2.jpg', fallback: 'foto4.jpg' },
+          { primary: 'prod-3.jpg', fallback: 'foto5.jpg' }
+        ],
+        audio: [
+          { primary: 'audio-1.jpg', fallback: 'foto1.jpg' },
+          { primary: 'audio-2.jpg', fallback: 'foto7.jpg' },
+          { primary: 'audio-3.jpg', fallback: 'foto8.jpg' }
+        ],
+        tutorias: [
+          { primary: 'tutorias-1.jpg', fallback: 'foto6.jpg' }
+        ],
+        gear: [
+          { primary: 'gear-1.jpg', fallback: 'foto10.jpg' },
+          { primary: 'gear-2.jpg', fallback: 'foto2.jpg' }
+        ]
+      };
 
       const CATEGORY_META = {
         produccion: { tag: 'Creación', title: 'Producción' },
@@ -1063,8 +1293,14 @@
         tutorias: [],
         gear: []
       };
+      const viewerIndices = {
+        produccion: 0,
+        audio: 0,
+        tutorias: 0,
+        gear: 0
+      };
 
-      // Cargador silencioso con fallback automático entre carpeta "fotos/" y raíz
+      // Cargador silencioso sin imágenes rotas
       function probeImageUrl(url) {
         return new Promise((resolve) => {
           const img = new Image();
@@ -1074,33 +1310,218 @@
         });
       }
 
-      async function initStudioPhotos() {
-        const checks = STUDIO_PHOTOS.map(async (item) => {
-          const fromFolder = await probeImageUrl(`fotos/${item.file}`);
-          if (fromFolder) {
-            return { category: item.category, url: fromFolder };
-          }
-          const fromRoot = await probeImageUrl(item.file);
-          if (fromRoot) {
-            return { category: item.category, url: fromRoot };
-          }
-          return null;
+      async function resolveSlotUrl(slot) {
+        const candidates = [
+          `fotos/${slot.primary}`,
+          slot.primary,
+          slot.fallback ? `fotos/${slot.fallback}` : null,
+          slot.fallback || null
+        ].filter(Boolean);
+
+        for (const url of candidates) {
+          const valid = await probeImageUrl(url);
+          if (valid) return valid;
+        }
+        return null;
+      }
+
+      function renderCategoryViewer(category) {
+        const container = document.getElementById(`mediaBanner-${category}`);
+        const urls = photosByCategory[category] || [];
+        if (!container || urls.length === 0) return;
+
+        const imgEl = container.querySelector('img');
+        const dotsWrapper = container.querySelector('.viewer-dots');
+        const arrowsWrapper = container.querySelector('.viewer-arrows');
+        const currentIndex = viewerIndices[category] % urls.length;
+
+        imgEl.style.opacity = '0.45';
+        imgEl.src = urls[currentIndex];
+        requestAnimationFrame(() => {
+          imgEl.style.opacity = '1';
         });
 
-        const results = await Promise.all(checks);
-        results.forEach((entry) => {
-          if (entry) {
-            loadedPhotos.push(entry);
-            if (photosByCategory[entry.category]) {
-              photosByCategory[entry.category].push(entry.url);
+        container.classList.remove('hidden');
+
+        if (urls.length <= 1) {
+          if (dotsWrapper) dotsWrapper.classList.add('hidden');
+          if (arrowsWrapper) arrowsWrapper.classList.add('hidden');
+          return;
+        }
+
+        if (dotsWrapper) {
+          dotsWrapper.classList.remove('hidden');
+          dotsWrapper.innerHTML = '';
+          urls.forEach((_, idx) => {
+            const dot = document.createElement('button');
+            dot.type = 'button';
+            dot.setAttribute('aria-label', `Ver foto ${idx + 1} de ${CATEGORY_META[category].title}`);
+            dot.className = idx === currentIndex
+              ? 'w-4 h-1.5 rounded-full bg-copperAmber transition-all cursor-pointer'
+              : 'w-1.5 h-1.5 rounded-full bg-white/40 hover:bg-white/75 transition-all cursor-pointer';
+            dot.addEventListener('click', (e) => {
+              e.stopPropagation();
+              viewerIndices[category] = idx;
+              renderCategoryViewer(category);
+            });
+            dotsWrapper.appendChild(dot);
+          });
+        }
+
+        if (arrowsWrapper) {
+          arrowsWrapper.classList.remove('hidden');
+        }
+      }
+
+      async function initStudioPhotos() {
+        const categories = Object.keys(CATEGORY_PHOTOS);
+
+        for (const cat of categories) {
+          const slots = CATEGORY_PHOTOS[cat];
+          const resolvedUrls = await Promise.all(slots.map((slot) => resolveSlotUrl(slot)));
+
+          resolvedUrls.forEach((url) => {
+            if (url && !photosByCategory[cat].includes(url)) {
+              photosByCategory[cat].push(url);
+              loadedPhotos.push({ category: cat, url });
             }
+          });
+
+          if (photosByCategory[cat].length > 0) {
+            renderCategoryViewer(cat);
           }
-        });
+        }
 
         if (loadedPhotos.length > 0) {
           startHeroBackgroundRotation();
         }
       }
+
+      // Controles prev/next y gestos táctiles para cada visor de categoría
+      Object.keys(CATEGORY_PHOTOS).forEach((cat) => {
+        const prevBtn = document.querySelector(`[data-viewer-prev="${cat}"]`);
+        const nextBtn = document.querySelector(`[data-viewer-next="${cat}"]`);
+        const container = document.getElementById(`mediaBanner-${cat}`);
+
+        if (prevBtn) {
+          prevBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            const len = photosByCategory[cat].length;
+            if (len <= 1) return;
+            viewerIndices[cat] = (viewerIndices[cat] - 1 + len) % len;
+            renderCategoryViewer(cat);
+          });
+        }
+
+        if (nextBtn) {
+          nextBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            const len = photosByCategory[cat].length;
+            if (len <= 1) return;
+            viewerIndices[cat] = (viewerIndices[cat] + 1) % len;
+            renderCategoryViewer(cat);
+          });
+        }
+
+        if (container) {
+          const imgEl = container.querySelector('img');
+          if (imgEl) {
+            imgEl.addEventListener('click', () => {
+              openPhotoLightbox(cat, viewerIndices[cat]);
+            });
+          }
+
+          let touchStartX = 0;
+          container.addEventListener('touchstart', (e) => {
+            touchStartX = e.changedTouches[0].screenX;
+          }, { passive: true });
+
+          container.addEventListener('touchend', (e) => {
+            const deltaX = e.changedTouches[0].screenX - touchStartX;
+            const len = photosByCategory[cat].length;
+            if (len <= 1 || Math.abs(deltaX) < 35) return;
+            viewerIndices[cat] = deltaX < 0
+              ? (viewerIndices[cat] + 1) % len
+              : (viewerIndices[cat] - 1 + len) % len;
+            renderCategoryViewer(cat);
+          }, { passive: true });
+        }
+      });
+
+      // Visor Modal Ampliado (Composite Lightbox)
+      const lightboxModal = document.getElementById('photoLightboxModal');
+      const lightboxImg = document.getElementById('lightboxImg');
+      const lightboxTitle = document.getElementById('lightboxTitle');
+      const lightboxCounter = document.getElementById('lightboxCounter');
+      const lightboxCloseBtn = document.getElementById('lightboxCloseBtn');
+      const lightboxPrevBtn = document.getElementById('lightboxPrevBtn');
+      const lightboxNextBtn = document.getElementById('lightboxNextBtn');
+      let lightboxState = { category: null, index: 0 };
+
+      function updateLightboxView() {
+        const { category, index } = lightboxState;
+        const urls = photosByCategory[category] || [];
+        if (!category || urls.length === 0) return;
+
+        const safeIdx = (index + urls.length) % urls.length;
+        lightboxState.index = safeIdx;
+        lightboxImg.src = urls[safeIdx];
+        lightboxImg.alt = `${CATEGORY_META[category].title} — Agustín Copello`;
+        lightboxTitle.textContent = CATEGORY_META[category].title;
+        lightboxCounter.textContent = `${safeIdx + 1} / ${urls.length}`;
+
+        const showNav = urls.length > 1;
+        lightboxPrevBtn.classList.toggle('hidden', !showNav);
+        lightboxNextBtn.classList.toggle('hidden', !showNav);
+      }
+
+      function openPhotoLightbox(category, index) {
+        const urls = photosByCategory[category] || [];
+        if (urls.length === 0) return;
+        lightboxState = { category, index };
+        updateLightboxView();
+        lightboxModal.classList.remove('hidden');
+        document.body.style.overflow = 'hidden';
+      }
+
+      function closePhotoLightbox() {
+        lightboxModal.classList.add('hidden');
+        document.body.style.overflow = '';
+      }
+
+      if (lightboxCloseBtn) {
+        lightboxCloseBtn.addEventListener('click', closePhotoLightbox);
+      }
+      if (lightboxPrevBtn) {
+        lightboxPrevBtn.addEventListener('click', () => {
+          lightboxState.index -= 1;
+          updateLightboxView();
+        });
+      }
+      if (lightboxNextBtn) {
+        lightboxNextBtn.addEventListener('click', () => {
+          lightboxState.index += 1;
+          updateLightboxView();
+        });
+      }
+      if (lightboxModal) {
+        lightboxModal.addEventListener('click', (e) => {
+          if (e.target === lightboxModal) closePhotoLightbox();
+        });
+      }
+
+      document.addEventListener('keydown', (e) => {
+        if (!lightboxModal || lightboxModal.classList.contains('hidden')) return;
+        if (e.key === 'Escape') closePhotoLightbox();
+        if (e.key === 'ArrowLeft') {
+          lightboxState.index -= 1;
+          updateLightboxView();
+        }
+        if (e.key === 'ArrowRight') {
+          lightboxState.index += 1;
+          updateLightboxView();
+        }
+      });
 
       // Crossfade suave del fondo atmosférico difuso en el Hero
       const heroLayerA = document.getElementById('heroBgLayerA');
@@ -1240,6 +1661,14 @@
         filterButtons.forEach((btn) => {
           const isMatch = btn.getAttribute('data-filter') === selectedCategory;
           if (isMatch) {
+      // 4. Filtros Interactivos de Servicios
+      const filterButtons = document.querySelectorAll('.filter-btn');
+      const serviceCards = document.querySelectorAll('.service-card');
+
+      function applyCategoryFilter(selectedCategory) {
+        filterButtons.forEach((btn) => {
+          const isMatch = btn.getAttribute('data-filter') === selectedCategory;
+          if (isMatch) {
             btn.classList.remove('bg-elevated', 'text-[#A1A1AA]', 'border-subtleBorder');
             btn.classList.add('bg-copperAmber', 'text-matteBlack', 'font-semibold', 'border-copperAmber');
           } else {
@@ -1256,8 +1685,6 @@
             card.classList.add('hidden');
           }
         });
-
-        updateCategoryBanner(selectedCategory);
       }
 
       filterButtons.forEach((btn) => {
@@ -1265,12 +1692,6 @@
           applyCategoryFilter(btn.getAttribute('data-filter'));
         });
       });
-
-      if (resetFilterBannerBtn) {
-        resetFilterBannerBtn.addEventListener('click', () => {
-          applyCategoryFilter('todos');
-        });
-      }
 
       document.querySelectorAll('[data-filter-jump]').forEach((jumpLink) => {
         jumpLink.addEventListener('click', () => {
